@@ -113,4 +113,35 @@
 
 .form-card a:hover {
   text-decoration: underline;
+}/* navigation bar styles */
+.navbar {
+  width: 100%;
+  background: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: fixed;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar a {
+  color: var(--text-main);
+  text-decoration: none;
+  font-weight: 600;
+  margin: 0 10px;
+}
+
+.navbar a.active {
+  color: var(--primary-color);
+}
+
+.page-container {
+  padding: 80px 20px 20px; /* account for fixed navbar */
+  text-align: center;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
 }

@@ -1,6 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import HomePage from './pages/HomePage';
+import QuizPage from './pages/QuizPage';
+import BreedProfiles from './pages/BreedProfiles';
 import './App.css'; 
 
 function App() {
@@ -21,6 +24,9 @@ function App() {
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/quiz" element={<QuizPage />} />
+          <Route path="/breeds" element={<BreedProfiles />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
