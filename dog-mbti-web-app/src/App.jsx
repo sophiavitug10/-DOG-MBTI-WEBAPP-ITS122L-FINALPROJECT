@@ -4,6 +4,7 @@ import Signup from './pages/Signup';
 import HomePage from './pages/HomePage';
 import QuizPage from './pages/QuizPage';
 import BreedProfiles from './pages/BreedProfiles';
+import ResultsPage from './pages/ResultsPage';
 import './App.css'; 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Route path="/home" element={<HomePage />} />
           <Route path="/quiz" element={<QuizPage />} />
           <Route path="/breeds" element={<BreedProfiles />} />
+          <Route path="/results" element={<ResultsPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
