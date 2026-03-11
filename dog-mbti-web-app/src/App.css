@@ -20,7 +20,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var(--bg-gradient);
+  background: #ffffff; /* changed from var(--bg-gradient) to plain white */
 }
 
 .login-container, 
@@ -113,7 +113,9 @@
 
 .form-card a:hover {
   text-decoration: underline;
-}/* navigation bar styles */
+}
+
+/* navigation bar styles */
 .navbar {
   width: 100%;
   background: white;
