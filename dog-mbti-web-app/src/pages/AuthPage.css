@@ -4,8 +4,8 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #f28b3a; /* The orange background */
-  padding: 20px;
+  background-color: #f28b3a;
+  padding: 0;
 }
 
 /* The main white card with split layout */
@@ -13,51 +13,86 @@
   display: flex;
   background: white;
   width: 100%;
-  max-width: 900px;
-  border-radius: 30px;
+  max-width: 100%;
+  border-radius: 0;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  min-height: 500px;
+  box-shadow: none;
+  min-height: 100vh;
 }
 
 /* Left side (Graphic) */
 .split-left {
-  flex: 1;
-  background: linear-gradient(135deg, #e65c00, #ffb347); /* Placeholder gradient for the spheres */
+  flex: 1.2;
+  background: linear-gradient(160deg, #e65c00 0%, #f97316 40%, #ffb347 80%, #ffd580 100%);
   color: white;
-  padding: 50px;
+  padding: 80px 70px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative circle blobs on the left side like the inspo */
+.split-left::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -60px;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(255, 220, 150, 0.7), rgba(230, 92, 0, 0.3));
+  box-shadow: inset -10px -10px 30px rgba(0,0,0,0.15), inset 10px 10px 30px rgba(255,255,255,0.2);
+}
+
+.split-left::after {
+  content: '';
+  position: absolute;
+  top: 100px;
+  left: 30px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(255, 210, 120, 0.6), rgba(220, 80, 0, 0.25));
+  box-shadow: inset -6px -6px 20px rgba(0,0,0,0.1), inset 6px 6px 20px rgba(255,255,255,0.15);
 }
 
 .split-title {
-  font-size: 2.5rem;
+  font-size: 3.2rem;
   font-weight: 300;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
+  letter-spacing: 0.05em;
+  position: relative;
+  z-index: 1;
 }
 
 .split-desc {
-  font-size: 0.85rem;
-  line-height: 1.6;
-  opacity: 0.9;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  opacity: 0.85;
+  max-width: 320px;
+  position: relative;
+  z-index: 1;
 }
 
 /* Right side (Form) */
 .split-right {
-  flex: 1.2;
-  padding: 50px;
+  flex: 1.4;
+  padding: 80px 90px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  background: #ffffff;
 }
 
 /* --- Toggle Header Styles --- */
 .auth-toggle-wrapper {
-  margin-bottom: 40px;
+  margin-bottom: 45px;
   border-bottom: 2px solid #e0e0e0;
   padding-bottom: 5px;
   align-self: flex-start;
-  width: 80%;
+  width: 75%;
 }
 
 .auth-toggle {
@@ -78,27 +113,34 @@
   transition: color 0.3s ease;
 }
 
-.toggle-btn.active { color: #e65c00; }
+.toggle-btn.active {
+  color: #e65c00;
+}
 
 .toggle-indicator {
   position: absolute;
   bottom: -7px;
   height: 3px;
   width: 50%;
-  background-color: #e65c00; 
+  background-color: #e65c00;
   transition: transform 0.3s ease-in-out;
   border-radius: 2px;
 }
 
-.toggle-indicator.left { transform: translateX(0); }
-.toggle-indicator.right { transform: translateX(100%); }
+.toggle-indicator.left {
+  transform: translateX(0);
+}
+
+.toggle-indicator.right {
+  transform: translateX(100%);
+}
 
 /* --- Pill Form Inputs --- */
 .auth-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  width: 80%;
+  gap: 22px;
+  width: 75%;
 }
 
 .input-field {
@@ -106,7 +148,12 @@
   align-items: center;
   border: 2px solid #e0e0e0;
   border-radius: 25px;
-  padding: 5px 20px;
+  padding: 6px 22px;
+  transition: border-color 0.2s ease;
+}
+
+.input-field:focus-within {
+  border-color: #f97316;
 }
 
 .input-field label {
@@ -114,7 +161,8 @@
   font-weight: bold;
   font-size: 0.9rem;
   margin-right: 15px;
-  min-width: 70px;
+  min-width: 75px;
+  white-space: nowrap;
 }
 
 .input-field input {
@@ -122,31 +170,52 @@
   outline: none;
   padding: 10px 0;
   flex: 1;
-  color: #a0a0a0;
+  color: #555;
   background: transparent;
+  font-size: 0.95rem;
 }
 
 /* Submit Button */
 .submit-btn {
-  background-color: #c9302c; /* The dark red/orange button */
+  background-color: #c9302c;
   border: none;
   border-radius: 25px;
-  padding: 15px;
+  padding: 14px 28px;
   color: white;
   font-weight: bold;
+  font-size: 0.95rem;
   cursor: pointer;
-  width: 150px;
+  width: 160px;
   margin-top: 10px;
-  align-self: flex-end; /* Pushes button to the right */
-  transition: background 0.3s;
+  align-self: flex-end;
+  transition: background 0.3s, transform 0.1s;
 }
 
-.submit-btn:hover { background-color: #a02622; }
+.submit-btn:hover {
+  background-color: #a02622;
+}
+
+.submit-btn:active {
+  transform: scale(0.97);
+}
 
 /* Responsive break for small screens */
 @media (max-width: 768px) {
-  .split-card { flex-direction: column; }
-  .split-left { padding: 30px; }
-  .split-right { padding: 30px; }
-  .auth-form, .auth-toggle-wrapper { width: 100%; }
+  .split-card {
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  .split-left {
+    flex: none;
+    min-height: 280px;
+    padding: 40px 30px;
+    justify-content: flex-end;
+  }
+  .split-right {
+    padding: 40px 30px;
+  }
+  .auth-form,
+  .auth-toggle-wrapper {
+    width: 100%;
+  }
 }
