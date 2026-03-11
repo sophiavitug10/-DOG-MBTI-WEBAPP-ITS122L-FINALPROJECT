@@ -1,0 +1,254 @@
+/* QuizPage Styles */
+
+.quiz-container {
+  max-width: 700px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.quiz-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.quiz-header h1 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 2.5em;
+}
+
+.quiz-subtitle {
+  color: #666;
+  font-size: 1.1em;
+  margin: 0;
+}
+
+/* Progress Section */
+.progress-section {
+  margin-bottom: 30px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  text-align: center;
+  color: #666;
+  font-size: 0.95em;
+  font-weight: 500;
+}
+
+/* Question Card */
+.question-card {
+  background: #f9f9f9;
+  border-radius: 12px;
+  padding: 30px;
+  margin-bottom: 30px;
+  border-left: 4px solid #667eea;
+}
+
+.question-text {
+  margin: 0 0 25px 0;
+  color: #333;
+  font-size: 1.3em;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+/* Options */
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.option-button {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 20px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1em;
+  color: #333;
+  text-align: left;
+}
+
+.option-button:hover {
+  border-color: #667eea;
+  background-color: #f0f4ff;
+  transform: translateX(5px);
+}
+
+.option-button:active {
+  background-color: #667eea;
+  color: white;
+  border-color: #667eea;
+}
+
+.option-radio {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.option-button:hover .option-radio {
+  border-color: #667eea;
+}
+
+.option-button:active .option-radio {
+  background-color: white;
+  border-color: white;
+}
+
+.option-text {
+  flex: 1;
+}
+
+/* Navigation */
+.quiz-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.nav-button {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95em;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.back-btn {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.back-btn:hover:not(:disabled) {
+  background-color: #e0e0e0;
+  transform: translateX(-3px);
+}
+
+.back-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  margin-left: auto;
+}
+
+.submit-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+.nav-info {
+  flex: 1;
+  text-align: center;
+  color: #666;
+  font-size: 0.9em;
+}
+
+.answered-count {
+  background-color: #667eea;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.85em;
+  font-weight: 500;
+  display: inline-block;
+}
+
+/* Quiz Info */
+.quiz-info {
+  background-color: #e8f0ff;
+  border-left: 4px solid #667eea;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 30px;
+}
+
+.quiz-info h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 1.1em;
+}
+
+.quiz-info p {
+  margin: 0;
+  color: #666;
+  font-size: 0.95em;
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .quiz-container {
+    padding: 20px;
+  }
+
+  .quiz-header h1 {
+    font-size: 1.8em;
+  }
+
+  .question-text {
+    font-size: 1.1em;
+  }
+
+  .option-button {
+    padding: 12px 15px;
+    gap: 10px;
+  }
+
+  .quiz-navigation {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nav-button {
+    width: 100%;
+  }
+
+  .submit-btn {
+    margin-left: 0;
+  }
+
+  .nav-info {
+    order: -1;
+  }
+}

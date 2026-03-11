@@ -1,0 +1,375 @@
+/* ResultsPage Styles */
+
+.results-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Results Header */
+.results-header {
+  text-align: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 15px;
+  margin-bottom: 40px;
+}
+
+.results-header h1 {
+  margin: 0 0 10px 0;
+  font-size: 2.5em;
+  font-weight: bold;
+}
+
+.results-subtitle {
+  margin: 0;
+  font-size: 1.1em;
+  opacity: 0.9;
+}
+
+/* MBTI Result Card */
+.mbti-result-card {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  margin-bottom: 40px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-left: 5px solid #667eea;
+}
+
+.mbti-type-display h2 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 1.8em;
+}
+
+.mbti-value {
+  color: #667eea;
+  font-size: 1.2em;
+  padding: 5px 15px;
+  background-color: #f0f4ff;
+  border-radius: 8px;
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.mbti-description {
+  margin: 0;
+  color: #666;
+  font-size: 1.1em;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+/* Compatible Breed Section */
+.compatible-breed-section {
+  margin-bottom: 40px;
+}
+
+.compatible-breed-section h2 {
+  color: #333;
+  font-size: 2em;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.breed-result-card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+}
+
+.breed-image-showcase {
+  width: 100%;
+  height: 500px;
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.breed-image-container {
+  overflow: hidden;
+  min-height: 450px;
+}
+
+.breed-result-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.breed-image-showcase:hover .breed-result-image {
+  transform: scale(1.05);
+}
+
+.breed-result-card:hover .breed-result-image {
+  transform: scale(1.05);
+}
+
+.breed-result-info {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.breed-result-info h3 {
+  margin: 0 0 15px 0;
+  font-size: 2em;
+  color: #333;
+}
+
+.breed-mbti-match {
+  color: #667eea;
+  font-size: 1.1em;
+  margin: 0 0 15px 0;
+  font-weight: 600;
+}
+
+.breed-result-description {
+  color: #666;
+  line-height: 1.6;
+  margin: 0 0 20px 0;
+}
+
+.breed-characteristics {
+  margin: 15px 0;
+}
+
+.breed-characteristics h4 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-weight: 600;
+}
+
+.breed-characteristics ul {
+  margin: 0;
+  padding-left: 20px;
+  list-style-position: inside;
+}
+
+.breed-characteristics li {
+  margin: 5px 0;
+  color: #666;
+}
+
+.breed-characteristics li:before {
+  content: '✓ ';
+  color: #667eea;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.breed-traits {
+  margin: 20px 0;
+}
+
+.breed-traits h4 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-weight: 600;
+}
+
+.traits-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.trait-badge {
+  background-color: #f0f4ff;
+  color: #667eea;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85em;
+  border: 1px solid #667eea;
+  font-weight: 500;
+}
+
+.explore-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95em;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+.explore-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+/* Chart Section */
+.chart-section {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  margin-bottom: 40px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.chart-section h2 {
+  color: #333;
+  font-size: 1.8em;
+  margin-top: 0;
+  text-align: center;
+}
+
+.chart-container {
+  position: relative;
+  height: 400px;
+  margin-top: 20px;
+}
+
+/* Personality Breakdown */
+.personality-breakdown {
+  margin-bottom: 40px;
+}
+
+.personality-breakdown h2 {
+  color: #333;
+  font-size: 2em;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.breakdown-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.breakdown-item {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #667eea;
+}
+
+.breakdown-item h4 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 1.1em;
+}
+
+.breakdown-item p {
+  margin: 5px 0;
+  color: #667eea;
+  font-weight: 500;
+  font-size: 0.95em;
+}
+
+.breakdown-desc {
+  color: #666 !important;
+  font-weight: normal !important;
+  line-height: 1.5;
+  margin-top: 10px;
+}
+
+/* Results Actions */
+.results-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin: 50px 0;
+  flex-wrap: wrap;
+}
+
+.retake-btn,
+.explore-breeds-btn {
+  padding: 15px 35px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1em;
+  transition: all 0.3s ease;
+}
+
+.retake-btn {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.retake-btn:hover {
+  background-color: #e0e0e0;
+  transform: translateY(-2px);
+}
+
+.explore-breeds-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.explore-breeds-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+/* No Results */
+.no-results {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 15px;
+}
+
+.no-results h1 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.no-results p {
+  color: #666;
+  margin-bottom: 30px;
+  font-size: 1.1em;
+}
+
+.no-breed-match {
+  text-align: center;
+  color: #666;
+  padding: 40px;
+  background-color: #fff3cd;
+  border-radius: 8px;
+  border-left: 4px solid #ffc107;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .breed-image-showcase {
+    height: 350px;
+    margin-bottom: 30px;
+  }
+
+  .results-header h1 {
+    font-size: 1.8em;
+  }
+
+  .breakdown-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .results-actions {
+    flex-direction: column;
+  }
+
+  .retake-btn,
+  .explore-breeds-btn {
+    width: 100%;
+  }
+
+  .chart-container {
+    height: 300px;
+  }
+}
