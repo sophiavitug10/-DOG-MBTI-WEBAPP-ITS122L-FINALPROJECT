@@ -29,15 +29,20 @@ const imageMap = {
 
 export default function BreedProfiles() {
   const breedRefs = useRef({});
+  const topRef = useRef(null);
 
   const scrollToBreed = (breedId) => {
+    if (breedId === 'top') {
+      topRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
     breedRefs.current[breedId]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return (
     <>
       <NavBar />
-      <div className="page-container breed-profiles-container">
+      <div className="page-container breed-profiles-container" ref={topRef}>
         {/* Header */}
         <div className="breed-profiles-header">
           <h1>Dog Breed Profiles</h1>
@@ -115,14 +120,11 @@ export default function BreedProfiles() {
                 {/* Characteristics */}
                 <div className="profile-section">
                   <h3>Characteristics & Behavior</h3>
-                  <ul className="characteristics-list">
+                  <div className="characteristics-grid">
                     {breed.characteristics.map((char, idx) => (
-                      <li key={idx}>
-                        <span className="checkmark">✓</span>
-                        {char}
-                      </li>
+                      <div key={idx} className="characteristic-item">{char}</div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
 
                 {/* Compatibility */}

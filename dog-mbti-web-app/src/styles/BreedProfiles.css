@@ -1,95 +1,87 @@
 /* BreedProfiles Styles */
 
 .breed-profiles-container {
-  max-width: 1200px;
+  max-width: 1160px;
 }
 
-/* Header */
 .breed-profiles-header {
-  text-align: center;
-  padding: 40px 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  text-align: left;
+  padding: 34px 30px;
+  background: linear-gradient(120deg, #2d3d4d 0%, #1f2a35 100%);
   color: white;
-  border-radius: 15px;
-  margin-bottom: 50px;
+  border-radius: 22px;
+  margin-bottom: 44px;
+  box-shadow: 0 16px 38px rgba(31, 42, 53, 0.2);
 }
 
 .breed-profiles-header h1 {
-  margin: 0 0 10px 0;
-  font-size: 2.5em;
-  font-weight: bold;
+  margin: 0 0 8px 0;
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
 }
 
 .breed-profiles-header .subtitle {
   margin: 0;
-  font-size: 1.1em;
-  opacity: 0.9;
+  color: #d3dee7;
+  font-size: 1.02rem;
+  max-width: 720px;
 }
 
-/* Carousel Gallery Section */
-.carousel-gallery-section {
-  margin-bottom: 60px;
+.carousel-gallery-section,
+.detailed-profiles-section,
+.comparison-section {
+  margin-bottom: 54px;
 }
 
-.carousel-gallery-section h2 {
-  font-size: 2em;
-  color: #333;
-  margin-bottom: 30px;
-  text-align: center;
+.carousel-gallery-section h2,
+.detailed-profiles-section h2,
+.comparison-section h2 {
+  font-size: 1.65rem;
+  color: #2e251c;
+  margin-bottom: 22px;
+  text-align: left;
 }
 
 .carousel-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 20px;
-  padding: 20px 0;
+  grid-template-columns: repeat(auto-fit, minmax(164px, 1fr));
+  gap: 16px;
 }
 
 .breed-carousel-card {
-  background: white;
-  border-radius: 12px;
+  background: #fff;
+  border: 1px solid #f0e5d8;
+  border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
+  transition: transform 0.24s ease, box-shadow 0.25s ease;
+  box-shadow: 0 10px 24px rgba(32, 24, 16, 0.08);
 }
 
 .breed-carousel-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  transform: translateY(-4px);
+  box-shadow: 0 18px 30px rgba(32, 24, 16, 0.14);
 }
 
 .carousel-image-container {
   position: relative;
-  overflow: hidden;
-  height: 150px;
+  height: 138px;
 }
 
 .carousel-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.breed-carousel-card:hover .carousel-image {
-  transform: scale(1.1);
 }
 
 .carousel-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(102, 126, 234, 0.9);
+  inset: 0;
+  background: linear-gradient(140deg, rgba(47, 59, 73, 0.82), rgba(20, 24, 30, 0.6));
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.2s ease;
 }
 
 .breed-carousel-card:hover .carousel-overlay {
@@ -97,75 +89,48 @@
 }
 
 .carousel-overlay p {
-  color: white;
-  font-weight: bold;
-  font-size: 0.9em;
+  color: #fff;
+  font-weight: 700;
   margin: 0;
 }
 
 .carousel-title {
-  padding: 10px 12px;
-  margin: 0;
-  font-size: 0.95em;
-  color: #333;
-  font-weight: 600;
-  text-align: center;
+  margin: 10px 12px 3px;
+  color: #2f2418;
+  font-size: 0.95rem;
+  font-weight: 700;
 }
 
 .carousel-mbti {
-  padding: 0 12px 10px 12px;
-  margin: 0;
-  font-size: 0.8em;
-  color: #667eea;
-  font-weight: 500;
-  text-align: center;
-}
-
-/* Detailed Profiles Section */
-.detailed-profiles-section {
-  margin: 60px 0;
-}
-
-.detailed-profiles-section h2 {
-  font-size: 2em;
-  color: #333;
-  margin-bottom: 30px;
-  text-align: center;
+  margin: 0 12px 14px;
+  color: #cc5400;
+  font-size: 0.82rem;
+  font-weight: 700;
 }
 
 .profiles-list {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 28px;
 }
 
 .breed-profile-card {
-  background: white;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  padding: 30px;
-  border-left: 5px solid #667eea;
+  background: #ffffff;
+  border: 1px solid #efe4d7;
+  border-radius: 20px;
+  box-shadow: 0 14px 32px rgba(33, 24, 16, 0.08);
+  padding: 24px;
 }
 
-.breed-profile-card:hover {
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-  transform: translateY(-2px);
-}
-
-/* Profile Header */
 .profile-header {
   display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  gap: 30px;
-  margin-bottom: 30px;
-  align-items: start;
+  grid-template-columns: 320px 1fr;
+  gap: 22px;
 }
 
 .profile-image-section {
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: 14px;
   height: 250px;
 }
 
@@ -173,191 +138,136 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.breed-profile-card:hover .profile-image {
-  transform: scale(1.05);
 }
 
 .profile-header-info h2 {
-  margin: 0 0 15px 0;
-  color: #333;
-  font-size: 2em;
+  margin: 0 0 10px 0;
+  color: #2f2418;
+  font-size: 2rem;
 }
 
 .mbti-badge {
   display: inline-block;
-  padding: 8px 15px;
-  background-color: #f0f4ff;
-  border-radius: 20px;
-  margin: 10px 0;
-  font-size: 0.95em;
-  color: #333;
+  padding: 7px 12px;
+  background: #fff0e3;
+  border-radius: 999px;
+  margin: 0;
+  color: #5a4027;
+  font-size: 0.9rem;
 }
 
 .mbti-badge span {
-  color: #667eea;
-  font-weight: bold;
-  font-size: 1.1em;
+  color: #d05300;
+  font-weight: 800;
 }
 
 .profile-description {
-  color: #666;
-  line-height: 1.8;
-  font-size: 1em;
-  margin: 15px 0 0 0;
+  color: #5f5042;
+  line-height: 1.78;
+  margin: 14px 0 0;
 }
 
-/* Profile Sections */
 .profile-section {
-  margin: 30px 0;
-  padding: 20px 0;
-  border-top: 1px solid #e0e0e0;
-}
-
-.profile-section:first-of-type {
-  border-top: none;
-  margin-top: 0;
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid #f0e4d7;
 }
 
 .profile-section h3 {
-  color: #333;
-  font-size: 1.3em;
-  margin: 0 0 15px 0;
-  font-weight: 600;
+  color: #2f2418;
+  font-size: 1.15rem;
+  margin: 0 0 12px;
 }
 
-/* Traits Grid */
 .traits-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .trait-item {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 12px 15px;
-  border-radius: 8px;
-  text-align: center;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.trait-item:hover {
-  transform: scale(1.05);
-  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+  background: #2f3b49;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
 }
 
 .trait-name {
   display: block;
 }
 
-/* Characteristics List */
-.characteristics-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.characteristics-list li {
-  padding: 12px 15px;
-  border-left: 3px solid #667eea;
-  margin-bottom: 10px;
-  background-color: #f9f9f9;
-  border-radius: 0 8px 8px 0;
-  color: #333;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.checkmark {
-  color: #667eea;
-  font-weight: bold;
-  font-size: 1.2em;
-  flex-shrink: 0;
-}
-
-/* Compatibility */
-.compatibility-list {
+.characteristics-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+}
+
+.characteristic-item {
+  background: #faf5ef;
+  border: 1px solid #eee1d2;
+  border-radius: 10px;
+  padding: 11px 12px;
+  color: #4f4133;
+  line-height: 1.58;
+}
+
+.compatibility-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .compatibility-badge {
-  background-color: #e8f0ff;
-  border-left: 4px solid #667eea;
-  padding: 15px;
-  border-radius: 8px;
-  color: #333;
-  font-weight: 500;
-  text-align: center;
+  background: #ffe9d3;
+  border: 1px solid #f5cfab;
+  border-radius: 10px;
+  padding: 9px 12px;
+  color: #5b4025;
+  font-weight: 600;
 }
 
-/* Comments Section */
 .comments-section {
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 8px;
-  border-left: 4px solid #ffc107;
+  background: #f8f9fb;
+  border: 1px solid #e9edf2;
+  border-radius: 12px;
+  padding: 14px;
 }
 
 .comments-placeholder {
-  text-align: center;
-  padding: 20px;
-  color: #666;
+  color: #596476;
 }
 
 .comments-placeholder p {
-  margin: 0 0 10px 0;
-  font-size: 1em;
+  margin: 0 0 6px;
 }
 
 .comments-placeholder small {
-  color: #999;
-  font-style: italic;
+  color: #7c8796;
 }
 
-/* Back to Carousel Button */
 .back-to-carousel-btn {
-  display: block;
-  margin: 30px auto 0;
-  padding: 12px 25px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  margin-top: 18px;
+  padding: 10px 15px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
+  background: #2f3b49;
+  color: #fff;
   cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s ease;
+  font-weight: 700;
 }
 
 .back-to-carousel-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
-}
-
-/* Comparison Table Section */
-.comparison-section {
-  margin: 60px 0;
-}
-
-.comparison-section h2 {
-  font-size: 2em;
-  color: #333;
-  margin-bottom: 30px;
-  text-align: center;
+  background: #26313d;
 }
 
 .comparison-table-container {
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  border: 1px solid #ecdfd1;
+  border-radius: 16px;
   overflow-x: auto;
+  box-shadow: 0 12px 30px rgba(39, 27, 15, 0.1);
 }
 
 .comparison-table {
@@ -366,112 +276,61 @@
 }
 
 .comparison-table thead {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: #2f3b49;
+  color: #fff;
 }
 
-.comparison-table th {
-  padding: 15px;
-  text-align: left;
-  font-weight: 600;
-  border-bottom: 2px solid #667eea;
-}
-
+.comparison-table th,
 .comparison-table td {
-  padding: 15px;
-  border-bottom: 1px solid #e0e0e0;
-  color: #333;
+  text-align: left;
+  padding: 13px 14px;
 }
 
-.comparison-table tbody tr:hover {
-  background-color: #f9f9f9;
+.comparison-table tbody tr:nth-child(even) {
+  background: #fbf7f2;
 }
 
 .breed-name-cell {
-  font-weight: 600;
-  color: #333;
+  font-weight: 700;
 }
 
 .mbti-cell {
-  color: #667eea;
-  font-weight: 500;
+  color: #ce5300;
+  font-weight: 700;
 }
 
 .energy-cell,
 .intelligence-cell,
 .friendliness-cell {
-  color: #ffc107;
-  font-size: 1.1em;
-  letter-spacing: 2px;
+  color: #d28700;
+  letter-spacing: 1px;
 }
 
-/* Responsive Design */
-@media (max-width: 1024px) {
-  .profile-header {
-    grid-template-columns: 1fr;
-  }
-
-  .carousel-gallery {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  }
-}
-
-@media (max-width: 768px) {
-  .breed-profiles-header h1 {
-    font-size: 1.8em;
-  }
-
-  .carousel-gallery {
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 12px;
-  }
-
-  .carousel-image-container {
-    height: 100px;
-  }
-
+@media (max-width: 900px) {
   .profile-header {
     grid-template-columns: 1fr;
   }
 
   .profile-image-section {
-    height: 200px;
-  }
-
-  .comparison-table {
-    font-size: 0.85em;
-  }
-
-  .comparison-table th,
-  .comparison-table td {
-    padding: 10px;
-  }
-
-  .traits-grid {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    height: 220px;
   }
 }
 
-@media (max-width: 600px) {
-  .carousel-gallery {
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-    gap: 8px;
-  }
-
+@media (max-width: 640px) {
   .breed-profiles-header {
-    padding: 20px 15px;
+    padding: 24px 20px;
   }
 
   .breed-profile-card {
-    padding: 15px;
+    padding: 18px;
   }
 
-  .profile-section h3 {
-    font-size: 1.1em;
+  .carousel-gallery {
+    grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+    gap: 12px;
   }
 
-  .compatibility-list,
-  .traits-grid {
+  .characteristics-grid {
     grid-template-columns: 1fr;
   }
 }

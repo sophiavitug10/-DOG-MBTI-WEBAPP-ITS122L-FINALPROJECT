@@ -1,46 +1,48 @@
 /* HomePage Styles */
 
 .hero-section {
-  text-align: center;
-  padding: 40px 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  text-align: left;
+  padding: 36px 30px;
+  background: linear-gradient(130deg, #2f3b49 0%, #1f2a35 100%);
   color: white;
-  border-radius: 10px;
-  margin-bottom: 50px;
+  border-radius: 22px;
+  margin-bottom: 42px;
+  box-shadow: 0 16px 38px rgba(31, 42, 53, 0.22);
 }
 
 .hero-section h1 {
-  font-size: 3em;
+  font-size: clamp(2rem, 4.6vw, 3rem);
   margin: 0;
-  font-weight: bold;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  font-weight: 800;
+  line-height: 1.05;
 }
 
 .hero-subtitle {
-  font-size: 1.3em;
-  margin-top: 10px;
-  opacity: 0.9;
+  font-size: 1rem;
+  margin-top: 12px;
+  color: #d0dde8;
+  max-width: 620px;
 }
 
 /* Carousel Section */
 .carousel-container {
-  margin: 60px 0;
+  margin: 44px 0;
 }
 
 .carousel {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 22px;
   justify-content: center;
   position: relative;
 }
 
 .carousel-btn {
-  background-color: #667eea;
+  background-color: #2f3b49;
   color: white;
   border: none;
-  padding: 15px 25px;
-  font-size: 1.5em;
+  padding: 12px 18px;
+  font-size: 1.25em;
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -52,8 +54,8 @@
 }
 
 .carousel-btn:hover {
-  background-color: #764ba2;
-  transform: scale(1.1);
+  background-color: #22303f;
+  transform: translateY(-1px);
 }
 
 .carousel-btn:active {
@@ -67,14 +69,16 @@
 
 .breed-card-large {
   background: white;
-  border-radius: 15px;
+  border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
+  border: 1px solid #ece0d2;
+  box-shadow: 0 14px 30px rgba(35, 24, 12, 0.13);
+  transition: transform 0.26s ease, box-shadow 0.26s ease;
 }
 
 .breed-card-large:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 36px rgba(35, 24, 12, 0.18);
 }
 
 .breed-image-large {
@@ -90,12 +94,12 @@
 .breed-info-large h2 {
   margin: 0 0 10px 0;
   font-size: 1.8em;
-  color: #333;
+  color: #2d2217;
 }
 
 .mbti-type {
-  color: #667eea;
-  font-size: 1.1em;
+  color: #d15300;
+  font-size: 1em;
   margin: 10px 0;
   font-weight: 600;
 }
@@ -108,8 +112,8 @@
 }
 
 .trait-badge {
-  background-color: #f0f0f0;
-  color: #333;
+  background-color: #f7ecdf;
+  color: #55412c;
   padding: 6px 12px;
   border-radius: 20px;
   font-size: 0.85em;
@@ -117,7 +121,7 @@
 }
 
 .breed-description {
-  color: #666;
+  color: #645446;
   line-height: 1.6;
   margin: 15px 0;
 }
@@ -133,12 +137,18 @@
 
 .characteristics ul {
   margin: 0;
-  padding-left: 20px;
+  padding-left: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
 }
 
 .characteristics li {
-  margin: 5px 0;
-  color: #666;
+  color: #564636;
+  background: #fbf5ee;
+  border: 1px solid #efe1d1;
+  border-radius: 9px;
+  padding: 8px 10px;
 }
 
 /* Carousel Indicators */
@@ -160,7 +170,7 @@
 }
 
 .indicator.active {
-  background-color: #667eea;
+  background-color: #d15300;
   width: 30px;
   border-radius: 6px;
 }
@@ -172,9 +182,9 @@
 }
 
 .features-section h2 {
-  font-size: 2.5em;
+  font-size: 2.1em;
   margin-bottom: 40px;
-  color: #333;
+  color: #2f2418;
 }
 
 .features-grid {
@@ -185,15 +195,16 @@
 
 .feature-card {
   background: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  padding: 26px;
+  border-radius: 16px;
+  border: 1px solid #ece0d2;
+  box-shadow: 0 8px 20px rgba(31, 24, 16, 0.1);
   transition: all 0.3s ease;
 }
 
 .feature-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 16px 30px rgba(31, 24, 16, 0.16);
 }
 
 .feature-icon {
@@ -208,13 +219,13 @@
 }
 
 .feature-card p {
-  color: #666;
-  line-height: 1.6;
+  color: #5f5042;
+  font-size: 0.95rem;
 }
 
 /* CTA Section */
 .cta-section {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(120deg, #ff8d2a 0%, #ea4e32 100%);
   color: white;
   padding: 60px 40px;
   border-radius: 15px;
@@ -234,8 +245,8 @@
 }
 
 .cta-button {
-  background-color: white;
-  color: #667eea;
+  background-color: #fff;
+  color: #b94805;
   border: none;
   padding: 15px 40px;
   font-size: 1.1em;
@@ -259,7 +270,7 @@
 .info-section h2 {
   font-size: 2.5em;
   margin-bottom: 40px;
-  color: #333;
+  color: #2f2418;
 }
 
 .steps {
@@ -279,7 +290,7 @@
   justify-content: center;
   width: 60px;
   height: 60px;
-  background-color: #667eea;
+  background-color: #2f3b49;
   color: white;
   border-radius: 50%;
   font-size: 1.8em;
@@ -306,12 +317,8 @@
     min-height: 45px;
   }
 
-  .hero-section h1 {
-    font-size: 2em;
-  }
-
-  .hero-subtitle {
-    font-size: 1em;
+  .hero-section {
+    padding: 26px 20px;
   }
 
   .features-grid {

@@ -176,11 +176,11 @@ export default function ResultsPage() {
 
                   <div className="breed-characteristics">
                     <h4>Why This Breed Matches You:</h4>
-                    <ul>
+                    <div className="breed-characteristics-list">
                       {compatibleBreed.characteristics.map((char, idx) => (
-                        <li key={idx}>{char}</li>
+                        <div key={idx} className="breed-char-item">{char}</div>
                       ))}
-                    </ul>
+                    </div>
                     </div>
 
                   <div className="breed-traits">

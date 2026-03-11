@@ -1,5 +1,6 @@
-//admin inquiries page for the admin to view and manage the user inquiries
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import '../styles/AdminPages.css';
 
 const AdminInquiries = () => {
   // Mock data representing adoption inquiries
@@ -9,78 +10,59 @@ const AdminInquiries = () => {
     { id: 3, name: 'Alex Reyes', contact: 'alex.r@email.com', breed: 'Greyhound', date: '2026-03-08', status: 'Resolved' }
   ]);
 
-  // Function to handle the status dropdown change
   const handleStatusChange = (id, newStatus) => {
     setInquiries(inquiries.map(inquiry => 
       inquiry.id === id ? { ...inquiry, status: newStatus } : inquiry
     ));
   };
 
-  // Helper function to color-code status badges
-  const getStatusColor = (status) => {
-    switch(status) {
-      case 'Pending': return '#e67e22'; // Orange
-      case 'Contacted': return '#3498db'; // Blue
-      case 'Resolved': return '#2ecc71'; // Green
-      default: return '#95a5a6'; // Gray
-    }
-  };
-
   return (
-    <div style={styles.container}>
-      <h2>Adoption Inquiries</h2>
-      <p>Manage adoption requests from users who have completed the Pawsonality test.</p>
+    <div className="admin-main">
+      <div className="admin-hero">
+        <h2>Adoption Inquiries</h2>
+        <p>Manage adoption requests from users who have completed the Pawsonality test.</p>
+      </div>
 
-      <table style={styles.table}>
+      <div className="admin-actions">
+        <Link to="/admin" className="admin-link" style={{ background: '#2f3b49', color: '#fff' }}>Back to Dashboard</Link>
+      </div>
+
+      <div className="admin-table-wrap">
+      <table className="admin-table">
         <thead>
-          <tr style={styles.tableHeader}>
-            <th style={{ padding: '10px' }}>Date</th>
-            <th style={{ padding: '10px' }}>User Name</th>
-            <th style={{ padding: '10px' }}>Contact Info</th>
-            <th style={{ padding: '10px' }}>Matched Breed</th>
-            <th style={{ padding: '10px' }}>Status</th>
+          <tr>
+            <th>Date</th>
+            <th>User Name</th>
+            <th>Contact Info</th>
+            <th>Matched Breed</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
           {inquiries.map((inq) => (
-            <tr key={inq.id} style={styles.tableRow}>
-              <td style={{ padding: '10px' }}>{inq.date}</td>
-              <td style={{ padding: '10px' }}><strong>{inq.name}</strong></td>
-              <td style={{ padding: '10px' }}>{inq.contact}</td>
-              <td style={{ padding: '10px' }}>{inq.breed}</td>
-              <td style={{ padding: '10px' }}>
-                {/* Dropdown to change status directly in the table */}
+            <tr key={inq.id}>
+              <td>{inq.date}</td>
+              <td><strong>{inq.name}</strong></td>
+              <td>{inq.contact}</td>
+              <td>{inq.breed}</td>
+              <td>
                 <select 
                   value={inq.status} 
                   onChange={(e) => handleStatusChange(inq.id, e.target.value)}
-                  style={{
-                    padding: '5px',
-                    borderRadius: '4px',
-                    backgroundColor: getStatusColor(inq.status),
-                    color: 'white',
-                    border: 'none',
-                    fontWeight: 'bold',
-                    cursor: 'pointer'
-                  }}
+                  className="admin-select"
                 >
-                  <option value="Pending" style={{backgroundColor: 'white', color: 'black'}}>Pending</option>
-                  <option value="Contacted" style={{backgroundColor: 'white', color: 'black'}}>Contacted</option>
-                  <option value="Resolved" style={{backgroundColor: 'white', color: 'black'}}>Resolved</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Contacted">Contacted</option>
+                  <option value="Resolved">Resolved</option>
                 </select>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      </div>
     </div>
   );
-};
-
-const styles = {
-  container: { padding: '20px', fontFamily: 'Arial, sans-serif' },
-  table: { width: '100%', borderCollapse: 'collapse', marginTop: '20px', backgroundColor: 'white', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' },
-  tableHeader: { backgroundColor: '#2c3e50', color: 'white', textAlign: 'left' },
-  tableRow: { borderBottom: '1px solid #ddd' }
 };
 
 export default AdminInquiries;

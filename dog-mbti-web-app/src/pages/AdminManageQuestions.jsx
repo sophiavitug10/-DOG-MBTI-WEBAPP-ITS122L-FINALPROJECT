@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import '../styles/AdminPages.css';
 
 const AdminManageQuestions = () => {
   const [questions, setQuestions] = useState([
@@ -29,70 +31,64 @@ const AdminManageQuestions = () => {
   };
 
   return (
-    <div style={styles.container}>
-      <h2>Manage Quiz Questions</h2>
-      <button style={styles.button} onClick={() => setShowForm(!showForm)}>
+    <div className="admin-main">
+      <div className="admin-hero">
+        <h2>Manage Quiz Questions</h2>
+        <p>Add and maintain MBTI mapping questions for the quiz engine.</p>
+      </div>
+
+      <div className="admin-actions" style={{ display: 'flex', gap: '10px' }}>
+        <Link to="/admin" className="admin-link" style={{ background: '#2f3b49', color: '#fff' }}>Back to Dashboard</Link>
+        <button className="admin-btn" onClick={() => setShowForm(!showForm)}>
         {showForm ? 'Cancel' : '+ Add New Question'}
       </button>
+      </div>
 
-      {/* ADD QUESTION FORM */}
       {showForm && (
-        <form onSubmit={handleSubmit} style={styles.form}>
-          <input required type="text" name="text" placeholder="Question Text (e.g., What is your weekend routine?)" value={formData.text} onChange={handleInputChange} style={styles.input} />
+        <form onSubmit={handleSubmit} className="admin-form">
+          <input required type="text" name="text" placeholder="Question Text (e.g., What is your weekend routine?)" value={formData.text} onChange={handleInputChange} className="admin-input" />
           
-          <div style={{ display: 'flex', gap: '10px' }}>
-            <div style={{ flex: 1 }}>
+          <div className="admin-form-grid">
+            <div>
               <h4>Option A</h4>
-              <input required type="text" name="optionA" placeholder="Answer A text" onChange={handleInputChange} style={{...styles.input, width: '90%'}} />
+              <input required type="text" name="optionA" placeholder="Answer A text" onChange={handleInputChange} className="admin-input" />
             </div>
-            <div style={{ flex: 1 }}>
+            <div>
               <h4>Option B</h4>
-              <input required type="text" name="optionB" placeholder="Answer B text" onChange={handleInputChange} style={{...styles.input, width: '90%'}} />
+              <input required type="text" name="optionB" placeholder="Answer B text" onChange={handleInputChange} className="admin-input" />
             </div>
           </div>
 
-          <button type="submit" style={styles.submitButton}>Save Question</button>
+          <button type="submit" className="admin-btn-success">Save Question</button>
         </form>
       )}
 
-      {/* DATA TABLE */}
-      <table style={styles.table}>
+      <div className="admin-table-wrap">
+      <table className="admin-table">
         <thead>
-          <tr style={styles.tableHeader}>
-            <th style={{ padding: '10px' }}>Question</th>
-            <th style={{ padding: '10px' }}>Target Traits</th>
-            <th style={{ padding: '10px' }}>Actions</th>
+          <tr>
+            <th>Question</th>
+            <th>Target Traits</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {questions.map((q) => (
-            <tr key={q.id} style={styles.tableRow}>
-              <td style={{ padding: '10px' }}><strong>{q.text}</strong><br/>
+            <tr key={q.id}>
+              <td><strong>{q.text}</strong><br/>
                 <small>A: {q.optionA} | B: {q.optionB}</small>
               </td>
-              <td style={{ padding: '10px' }}>{q.traitPair}</td>
-              <td style={{ padding: '10px' }}>
-                <button style={styles.deleteBtn} onClick={() => handleDelete(q.id)}>Delete</button>
+              <td>{q.traitPair}</td>
+              <td>
+                <button className="admin-btn-danger" onClick={() => handleDelete(q.id)}>Delete</button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      </div>
     </div>
   );
-};
-
-// Reusing the same styles block from ManageBreeds to keep it consistent!
-const styles = {
-  container: { padding: '20px', fontFamily: 'Arial, sans-serif' },
-  button: { padding: '10px 15px', backgroundColor: '#9b59b6', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', marginBottom: '20px' },
-  submitButton: { padding: '10px 15px', backgroundColor: '#2ecc71', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', marginTop: '10px' },
-  form: { display: 'flex', flexDirection: 'column', gap: '10px', backgroundColor: '#f9f9f9', padding: '20px', borderRadius: '8px', marginBottom: '20px' },
-  input: { padding: '10px', border: '1px solid #ccc', borderRadius: '4px', marginBottom: '5px' },
-  table: { width: '100%', borderCollapse: 'collapse', marginTop: '10px' },
-  tableHeader: { backgroundColor: '#2c3e50', color: 'white', textAlign: 'left' },
-  tableRow: { borderBottom: '1px solid #ddd' },
-  deleteBtn: { padding: '5px 10px', backgroundColor: '#e74c3c', color: 'white', border: 'none', cursor: 'pointer', borderRadius: '3px' }
 };
 
 export default AdminManageQuestions;

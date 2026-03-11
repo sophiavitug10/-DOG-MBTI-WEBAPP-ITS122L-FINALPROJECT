@@ -7,34 +7,34 @@
 
 /* Results Header */
 .results-header {
-  text-align: center;
-  padding: 40px 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  text-align: left;
+  padding: 34px 28px;
+  background: linear-gradient(120deg, #2f3b49 0%, #1f2a35 100%);
   color: white;
-  border-radius: 15px;
+  border-radius: 20px;
   margin-bottom: 40px;
 }
 
 .results-header h1 {
   margin: 0 0 10px 0;
-  font-size: 2.5em;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
   font-weight: bold;
 }
 
 .results-subtitle {
   margin: 0;
-  font-size: 1.1em;
-  opacity: 0.9;
+  font-size: 1.02rem;
+  color: #d0dde8;
 }
 
 /* MBTI Result Card */
 .mbti-result-card {
   background: white;
-  border-radius: 15px;
+  border-radius: 16px;
   padding: 30px;
   margin-bottom: 40px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  border-left: 5px solid #667eea;
+  border-left: 5px solid #d15300;
 }
 
 .mbti-type-display h2 {
@@ -44,10 +44,10 @@
 }
 
 .mbti-value {
-  color: #667eea;
+  color: #d15300;
   font-size: 1.2em;
   padding: 5px 15px;
-  background-color: #f0f4ff;
+  background-color: #fff0e3;
   border-radius: 8px;
   margin-left: 10px;
   font-weight: bold;
@@ -56,10 +56,11 @@
 .mbti-description {
   margin: 0;
   color: #666;
-  font-size: 1.1em;
+  font-size: 1rem;
   padding: 15px;
   background-color: #f9f9f9;
   border-radius: 8px;
+  line-height: 1.72;
 }
 
 /* Compatible Breed Section */
@@ -68,7 +69,7 @@
 }
 
 .compatible-breed-section h2 {
-  color: #333;
+  color: #2f2418;
   font-size: 2em;
   margin-bottom: 25px;
   text-align: center;
@@ -76,7 +77,7 @@
 
 .breed-result-card {
   background: white;
-  border-radius: 15px;
+  border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   padding: 30px;
@@ -85,7 +86,7 @@
 .breed-image-showcase {
   width: 100%;
   height: 500px;
-  border-radius: 15px;
+  border-radius: 16px;
   overflow: hidden;
   margin-bottom: 40px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
@@ -125,7 +126,7 @@
 }
 
 .breed-mbti-match {
-  color: #667eea;
+  color: #d15300;
   font-size: 1.1em;
   margin: 0 0 15px 0;
   font-weight: 600;
@@ -133,7 +134,7 @@
 
 .breed-result-description {
   color: #666;
-  line-height: 1.6;
+  line-height: 1.72;
   margin: 0 0 20px 0;
 }
 
@@ -147,22 +148,17 @@
   font-weight: 600;
 }
 
-.breed-characteristics ul {
-  margin: 0;
-  padding-left: 20px;
-  list-style-position: inside;
+.breed-characteristics-list {
+  display: grid;
+  gap: 8px;
 }
 
-.breed-characteristics li {
-  margin: 5px 0;
-  color: #666;
-}
-
-.breed-characteristics li:before {
-  content: '✓ ';
-  color: #667eea;
-  font-weight: bold;
-  margin-right: 5px;
+.breed-char-item {
+  background: #fbf5ee;
+  border: 1px solid #efe1d1;
+  border-radius: 9px;
+  padding: 9px 11px;
+  color: #584838;
 }
 
 .breed-traits {
@@ -182,17 +178,17 @@
 }
 
 .trait-badge {
-  background-color: #f0f4ff;
-  color: #667eea;
+  background-color: #f9eee0;
+  color: #73420f;
   padding: 6px 12px;
   border-radius: 20px;
   font-size: 0.85em;
-  border: 1px solid #667eea;
+  border: 1px solid #efcba3;
   font-weight: 500;
 }
 
 .explore-btn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(120deg, #ff8d2a 0%, #ea4e32 100%);
   color: white;
   border: none;
   padding: 12px 25px;
@@ -212,7 +208,7 @@
 /* Chart Section */
 .chart-section {
   background: white;
-  border-radius: 15px;
+  border-radius: 16px;
   padding: 30px;
   margin-bottom: 40px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -254,7 +250,7 @@
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  border-left: 4px solid #667eea;
+  border-left: 4px solid #2f3b49;
 }
 
 .breakdown-item h4 {
@@ -265,7 +261,7 @@
 
 .breakdown-item p {
   margin: 5px 0;
-  color: #667eea;
+  color: #9a3f00;
   font-weight: 500;
   font-size: 0.95em;
 }
@@ -273,7 +269,7 @@
 .breakdown-desc {
   color: #666 !important;
   font-weight: normal !important;
-  line-height: 1.5;
+  line-height: 1.7;
   margin-top: 10px;
 }
 
@@ -308,7 +304,7 @@
 }
 
 .explore-breeds-btn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(120deg, #ff8d2a 0%, #ea4e32 100%);
   color: white;
 }
 

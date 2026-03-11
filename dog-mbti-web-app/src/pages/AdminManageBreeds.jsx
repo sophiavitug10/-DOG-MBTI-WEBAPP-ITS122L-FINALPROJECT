@@ -1,5 +1,6 @@
-//admin manage breed page for the admin to view, add, edit, and delete the dog breeds
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import '../styles/AdminPages.css';
 
 const AdminManageBreeds = () => {
   // Mock data highlighting lesser-known breeds!
@@ -17,11 +18,10 @@ const AdminManageBreeds = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Create a fake ID for the demo
     const newBreed = { ...formData, id: Date.now() };
     setBreeds([...breeds, newBreed]);
-    setFormData({ name: '', mbti: '', energy: 'Low', care: '' }); // Reset form
-    setShowForm(false); // Hide form
+    setFormData({ name: '', mbti: '', energy: 'Low', care: '' });
+    setShowForm(false);
   };
 
   const handleDelete = (id) => {
@@ -29,37 +29,43 @@ const AdminManageBreeds = () => {
   };
 
   return (
-    <div style={styles.container}>
-      <h2>Manage Dog Breeds</h2>
-      <button style={styles.button} onClick={() => setShowForm(!showForm)}>
+    <div className="admin-main">
+      <div className="admin-hero">
+        <h2>Manage Dog Breeds</h2>
+        <p>Create and curate the breeds shown in Pawsonality.</p>
+      </div>
+
+      <div className="admin-actions" style={{ display: 'flex', gap: '10px' }}>
+        <Link to="/admin" className="admin-link" style={{ background: '#2f3b49', color: '#fff' }}>Back to Dashboard</Link>
+        <button className="admin-btn" onClick={() => setShowForm(!showForm)}>
         {showForm ? 'Cancel' : '+ Add New Breed'}
       </button>
+      </div>
 
-      {/* ADD BREED FORM */}
       {showForm && (
-        <form onSubmit={handleSubmit} style={styles.form}>
+        <form onSubmit={handleSubmit} className="admin-form">
           <h3>Add Breed Details</h3>
-          <input required type="text" name="name" placeholder="Breed Name" value={formData.name} onChange={handleInputChange} style={styles.input} />
-          <input required type="text" name="mbti" placeholder="MBTI (e.g. ENFP)" value={formData.mbti} onChange={handleInputChange} style={styles.input} />
+          <input required type="text" name="name" placeholder="Breed Name" value={formData.name} onChange={handleInputChange} className="admin-input" />
+          <input required type="text" name="mbti" placeholder="MBTI (e.g. ENFP)" value={formData.mbti} onChange={handleInputChange} className="admin-input" />
           
-          <select name="energy" value={formData.energy} onChange={handleInputChange} style={styles.input}>
+          <select name="energy" value={formData.energy} onChange={handleInputChange} className="admin-select">
             <option value="Low">Low Energy</option>
             <option value="Medium">Medium Energy</option>
             <option value="High">High Energy</option>
           </select>
 
-          <textarea required name="care" placeholder="Care Needs & Description" value={formData.care} onChange={handleInputChange} style={{...styles.input, height: '60px'}} />
+          <textarea required name="care" placeholder="Care Needs & Description" value={formData.care} onChange={handleInputChange} className="admin-textarea" />
           
-          <div style={styles.imagePlaceholder}>📷 Click to upload image (Mock)</div>
+          <div className="admin-tag">Image upload placeholder</div>
           
-          <button type="submit" style={styles.submitButton}>Save Breed</button>
+          <button type="submit" className="admin-btn-success">Save Breed</button>
         </form>
       )}
 
-      {/* DATA TABLE */}
-      <table style={styles.table}>
+      <div className="admin-table-wrap">
+      <table className="admin-table">
         <thead>
-          <tr style={styles.tableHeader}>
+          <tr>
             <th>Breed Name</th>
             <th>MBTI Match</th>
             <th>Energy Level</th>
@@ -68,35 +74,23 @@ const AdminManageBreeds = () => {
         </thead>
         <tbody>
           {breeds.map((breed) => (
-            <tr key={breed.id} style={styles.tableRow}>
+            <tr key={breed.id}>
               <td><strong>{breed.name}</strong></td>
               <td>{breed.mbti}</td>
               <td>{breed.energy}</td>
               <td>
-                <button style={styles.editBtn} onClick={() => alert('Edit clicked! (Implement for final)')}>Edit</button>
-                <button style={styles.deleteBtn} onClick={() => handleDelete(breed.id)}>Delete</button>
+                <div className="admin-row-actions">
+                  <button className="admin-btn-alt" onClick={() => alert('Edit clicked! (Implement for final)')}>Edit</button>
+                  <button className="admin-btn-danger" onClick={() => handleDelete(breed.id)}>Delete</button>
+                </div>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      </div>
     </div>
   );
-};
-
-// Reusable styles
-const styles = {
-  container: { padding: '20px', fontFamily: 'Arial, sans-serif' },
-  button: { padding: '10px 15px', backgroundColor: '#3498db', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', marginBottom: '20px' },
-  submitButton: { padding: '10px 15px', backgroundColor: '#2ecc71', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' },
-  form: { display: 'flex', flexDirection: 'column', gap: '10px', backgroundColor: '#f9f9f9', padding: '20px', borderRadius: '8px', marginBottom: '20px' },
-  input: { padding: '10px', border: '1px solid #ccc', borderRadius: '4px' },
-  imagePlaceholder: { padding: '20px', border: '2px dashed #ccc', textAlign: 'center', color: '#7f8c8d', cursor: 'pointer', backgroundColor: '#ecf0f1' },
-  table: { width: '100%', borderCollapse: 'collapse', marginTop: '10px' },
-  tableHeader: { backgroundColor: '#2c3e50', color: 'white', textAlign: 'left', padding: '10px' },
-  tableRow: { borderBottom: '1px solid #ddd' },
-  editBtn: { marginRight: '10px', padding: '5px 10px', backgroundColor: '#f1c40f', border: 'none', cursor: 'pointer', borderRadius: '3px' },
-  deleteBtn: { padding: '5px 10px', backgroundColor: '#e74c3c', color: 'white', border: 'none', cursor: 'pointer', borderRadius: '3px' }
 };
 
 export default AdminManageBreeds;

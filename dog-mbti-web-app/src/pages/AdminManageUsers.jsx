@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import '../styles/AdminPages.css';
 
 const AdminManageUsers = () => {
   // Mock user data
@@ -10,34 +12,34 @@ const AdminManageUsers = () => {
   ]);
 
   return (
-    <div style={styles.container}>
-      <h2>Manage Users</h2>
-      <p>View registered users and their Pawsonality MBTI results.</p>
+    <div className="admin-main">
+      <div className="admin-hero">
+        <h2>Manage Users</h2>
+        <p>View registered users and their Pawsonality MBTI results.</p>
+      </div>
 
-      <table style={styles.table}>
+      <div className="admin-actions">
+        <Link to="/admin" className="admin-link" style={{ background: '#2f3b49', color: '#fff' }}>Back to Dashboard</Link>
+      </div>
+
+      <div className="admin-table-wrap">
+      <table className="admin-table">
         <thead>
-          <tr style={styles.tableHeader}>
-            <th style={{ padding: '10px' }}>User ID</th>
-            <th style={{ padding: '10px' }}>Name</th>
-            <th style={{ padding: '10px' }}>Email</th>
-            <th style={{ padding: '10px' }}>Pawsonality Match</th>
+          <tr>
+            <th>User ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Pawsonality Match</th>
           </tr>
         </thead>
         <tbody>
           {users.map((user) => (
-            <tr key={user.id} style={styles.tableRow}>
-              <td style={{ padding: '10px', color: '#7f8c8d' }}>{user.id}</td>
-              <td style={{ padding: '10px' }}><strong>{user.name}</strong></td>
-              <td style={{ padding: '10px' }}>{user.email}</td>
-              <td style={{ padding: '10px' }}>
-                <span style={{ 
-                  backgroundColor: user.mbtiResult === 'Not Taken' ? '#ecf0f1' : '#f39c12',
-                  color: user.mbtiResult === 'Not Taken' ? '#7f8c8d' : 'white',
-                  padding: '4px 8px',
-                  borderRadius: '12px',
-                  fontSize: '0.9em',
-                  fontWeight: 'bold'
-                }}>
+            <tr key={user.id}>
+              <td>{user.id}</td>
+              <td><strong>{user.name}</strong></td>
+              <td>{user.email}</td>
+              <td>
+                <span className={`admin-tag ${user.mbtiResult === 'Not Taken' ? '' : 'orange'}`}>
                   {user.mbtiResult}
                 </span>
               </td>
@@ -45,15 +47,9 @@ const AdminManageUsers = () => {
           ))}
         </tbody>
       </table>
+      </div>
     </div>
   );
-};
-
-const styles = {
-  container: { padding: '20px', fontFamily: 'Arial, sans-serif' },
-  table: { width: '100%', borderCollapse: 'collapse', marginTop: '20px', backgroundColor: 'white', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' },
-  tableHeader: { backgroundColor: '#2c3e50', color: 'white', textAlign: 'left' },
-  tableRow: { borderBottom: '1px solid #ddd' }
 };
 
 export default AdminManageUsers;
