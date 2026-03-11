@@ -1,10 +1,12 @@
 import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
+import { QuizProvider } from './context/QuizContext';
 
 // User Pages
 import AuthPage from './pages/AuthPage'; 
 import HomePage from './pages/HomePage';
 import QuizPage from './pages/QuizPage';
 import BreedProfiles from './pages/BreedProfiles';
+import ResultsPage from './pages/ResultsPage';
 
 // Admin Pages
 import AdminDashboard from './pages/AdminDashboard';
@@ -25,28 +27,31 @@ function App() {
   );
 
   return (
-    <Router>
-      <div className="app-wrapper">
-        <Routes>
-          <Route path="/" element={<Navigate to="/login" />} />
-          
-          <Route path="/login" element={<AuthPage />} />
-          <Route path="/signup" element={<Navigate to="/login" />} /> 
+    <QuizProvider>
+      <Router>
+        <div className="app-wrapper">
+          <Routes>
+            <Route path="/" element={<Navigate to="/login" />} />
+            
+            <Route path="/login" element={<AuthPage />} />
+            <Route path="/signup" element={<Navigate to="/login" />} /> 
 
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/quiz" element={<QuizPage />} />
-          <Route path="/breeds" element={<BreedProfiles />} />
-          
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/admin/breeds" element={<AdminManageBreeds />} />
-          <Route path="/admin/questions" element={<AdminManageQuestions />} />
-          <Route path="/admin/users" element={<AdminManageUsers />} />
-          <Route path="/admin/inquiries" element={<AdminInquiries />} />
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/quiz" element={<QuizPage />} />
+            <Route path="/results" element={<ResultsPage />} />
+            <Route path="/breeds" element={<BreedProfiles />} />
+            
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/breeds" element={<AdminManageBreeds />} />
+            <Route path="/admin/questions" element={<AdminManageQuestions />} />
+            <Route path="/admin/users" element={<AdminManageUsers />} />
+            <Route path="/admin/inquiries" element={<AdminInquiries />} />
 
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </div>
-    </Router>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
+      </Router>
+    </QuizProvider>
   );
 }
 

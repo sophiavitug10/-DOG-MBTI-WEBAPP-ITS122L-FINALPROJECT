@@ -1,0 +1,477 @@
+/* BreedProfiles Styles */
+
+.breed-profiles-container {
+  max-width: 1200px;
+}
+
+/* Header */
+.breed-profiles-header {
+  text-align: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 15px;
+  margin-bottom: 50px;
+}
+
+.breed-profiles-header h1 {
+  margin: 0 0 10px 0;
+  font-size: 2.5em;
+  font-weight: bold;
+}
+
+.breed-profiles-header .subtitle {
+  margin: 0;
+  font-size: 1.1em;
+  opacity: 0.9;
+}
+
+/* Carousel Gallery Section */
+.carousel-gallery-section {
+  margin-bottom: 60px;
+}
+
+.carousel-gallery-section h2 {
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.carousel-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.breed-carousel-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.breed-carousel-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-image-container {
+  position: relative;
+  overflow: hidden;
+  height: 150px;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.breed-carousel-card:hover .carousel-image {
+  transform: scale(1.1);
+}
+
+.carousel-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(102, 126, 234, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.breed-carousel-card:hover .carousel-overlay {
+  opacity: 1;
+}
+
+.carousel-overlay p {
+  color: white;
+  font-weight: bold;
+  font-size: 0.9em;
+  margin: 0;
+}
+
+.carousel-title {
+  padding: 10px 12px;
+  margin: 0;
+  font-size: 0.95em;
+  color: #333;
+  font-weight: 600;
+  text-align: center;
+}
+
+.carousel-mbti {
+  padding: 0 12px 10px 12px;
+  margin: 0;
+  font-size: 0.8em;
+  color: #667eea;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Detailed Profiles Section */
+.detailed-profiles-section {
+  margin: 60px 0;
+}
+
+.detailed-profiles-section h2 {
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.profiles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.breed-profile-card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  padding: 30px;
+  border-left: 5px solid #667eea;
+}
+
+.breed-profile-card:hover {
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Profile Header */
+.profile-header {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 30px;
+  margin-bottom: 30px;
+  align-items: start;
+}
+
+.profile-image-section {
+  overflow: hidden;
+  border-radius: 12px;
+  height: 250px;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.breed-profile-card:hover .profile-image {
+  transform: scale(1.05);
+}
+
+.profile-header-info h2 {
+  margin: 0 0 15px 0;
+  color: #333;
+  font-size: 2em;
+}
+
+.mbti-badge {
+  display: inline-block;
+  padding: 8px 15px;
+  background-color: #f0f4ff;
+  border-radius: 20px;
+  margin: 10px 0;
+  font-size: 0.95em;
+  color: #333;
+}
+
+.mbti-badge span {
+  color: #667eea;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.profile-description {
+  color: #666;
+  line-height: 1.8;
+  font-size: 1em;
+  margin: 15px 0 0 0;
+}
+
+/* Profile Sections */
+.profile-section {
+  margin: 30px 0;
+  padding: 20px 0;
+  border-top: 1px solid #e0e0e0;
+}
+
+.profile-section:first-of-type {
+  border-top: none;
+  margin-top: 0;
+}
+
+.profile-section h3 {
+  color: #333;
+  font-size: 1.3em;
+  margin: 0 0 15px 0;
+  font-weight: 600;
+}
+
+/* Traits Grid */
+.traits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.trait-item {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 12px 15px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.trait-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+.trait-name {
+  display: block;
+}
+
+/* Characteristics List */
+.characteristics-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.characteristics-list li {
+  padding: 12px 15px;
+  border-left: 3px solid #667eea;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+  border-radius: 0 8px 8px 0;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.checkmark {
+  color: #667eea;
+  font-weight: bold;
+  font-size: 1.2em;
+  flex-shrink: 0;
+}
+
+/* Compatibility */
+.compatibility-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.compatibility-badge {
+  background-color: #e8f0ff;
+  border-left: 4px solid #667eea;
+  padding: 15px;
+  border-radius: 8px;
+  color: #333;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Comments Section */
+.comments-section {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  border-left: 4px solid #ffc107;
+}
+
+.comments-placeholder {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+}
+
+.comments-placeholder p {
+  margin: 0 0 10px 0;
+  font-size: 1em;
+}
+
+.comments-placeholder small {
+  color: #999;
+  font-style: italic;
+}
+
+/* Back to Carousel Button */
+.back-to-carousel-btn {
+  display: block;
+  margin: 30px auto 0;
+  padding: 12px 25px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.back-to-carousel-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+/* Comparison Table Section */
+.comparison-section {
+  margin: 60px 0;
+}
+
+.comparison-section h2 {
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.comparison-table-container {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.comparison-table thead {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.comparison-table th {
+  padding: 15px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid #667eea;
+}
+
+.comparison-table td {
+  padding: 15px;
+  border-bottom: 1px solid #e0e0e0;
+  color: #333;
+}
+
+.comparison-table tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.breed-name-cell {
+  font-weight: 600;
+  color: #333;
+}
+
+.mbti-cell {
+  color: #667eea;
+  font-weight: 500;
+}
+
+.energy-cell,
+.intelligence-cell,
+.friendliness-cell {
+  color: #ffc107;
+  font-size: 1.1em;
+  letter-spacing: 2px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .profile-header {
+    grid-template-columns: 1fr;
+  }
+
+  .carousel-gallery {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .breed-profiles-header h1 {
+    font-size: 1.8em;
+  }
+
+  .carousel-gallery {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 12px;
+  }
+
+  .carousel-image-container {
+    height: 100px;
+  }
+
+  .profile-header {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-image-section {
+    height: 200px;
+  }
+
+  .comparison-table {
+    font-size: 0.85em;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: 10px;
+  }
+
+  .traits-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .carousel-gallery {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 8px;
+  }
+
+  .breed-profiles-header {
+    padding: 20px 15px;
+  }
+
+  .breed-profile-card {
+    padding: 15px;
+  }
+
+  .profile-section h3 {
+    font-size: 1.1em;
+  }
+
+  .compatibility-list,
+  .traits-grid {
+    grid-template-columns: 1fr;
+  }
+}
