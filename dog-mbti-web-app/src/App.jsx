@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
 import { QuizProvider } from './context/QuizContext';
+import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
 
 // User Pages
 import AuthPage from './pages/AuthPage'; 
@@ -27,31 +29,33 @@ function App() {
   );
 
   return (
-    <QuizProvider>
-      <Router>
-        <div className="app-wrapper">
-          <Routes>
-            <Route path="/" element={<Navigate to="/login" />} />
-            
-            <Route path="/login" element={<AuthPage />} />
-            <Route path="/signup" element={<Navigate to="/login" />} /> 
+    <AuthProvider>
+      <QuizProvider>
+        <Router>
+          <div className="app-wrapper">
+            <Routes>
+              <Route path="/" element={<Navigate to="/login" />} />
 
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/quiz" element={<QuizPage />} />
-            <Route path="/results" element={<ResultsPage />} />
-            <Route path="/breeds" element={<BreedProfiles />} />
-            
-            <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/admin/breeds" element={<AdminManageBreeds />} />
-            <Route path="/admin/questions" element={<AdminManageQuestions />} />
-            <Route path="/admin/users" element={<AdminManageUsers />} />
-            <Route path="/admin/inquiries" element={<AdminInquiries />} />
+              <Route path="/login" element={<AuthPage />} />
+              <Route path="/signup" element={<Navigate to="/login" />} />
 
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </div>
-      </Router>
-    </QuizProvider>
+              <Route path="/home" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
+              <Route path="/quiz" element={<ProtectedRoute><QuizPage /></ProtectedRoute>} />
+              <Route path="/results" element={<ProtectedRoute><ResultsPage /></ProtectedRoute>} />
+              <Route path="/breeds" element={<ProtectedRoute><BreedProfiles /></ProtectedRoute>} />
+
+              <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+              <Route path="/admin/breeds" element={<ProtectedRoute><AdminManageBreeds /></ProtectedRoute>} />
+              <Route path="/admin/questions" element={<ProtectedRoute><AdminManageQuestions /></ProtectedRoute>} />
+              <Route path="/admin/users" element={<ProtectedRoute><AdminManageUsers /></ProtectedRoute>} />
+              <Route path="/admin/inquiries" element={<ProtectedRoute><AdminInquiries /></ProtectedRoute>} />
+
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
+        </Router>
+      </QuizProvider>
+    </AuthProvider>
   );
 }
 

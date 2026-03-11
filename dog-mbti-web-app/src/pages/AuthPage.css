@@ -111,6 +111,16 @@
   width: 100%;
 }
 
+.forgot-header {
+  color: #e65c00;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+  width: 100%;
+  margin: 0;
+  padding: 8px 0;
+}
+
 .toggle-btn {
   flex: 1;
   background: none;
@@ -186,6 +196,34 @@
   font-size: 0.95rem;
 }
 
+.auth-error {
+  color: #c9302c;
+  font-size: 0.9rem;
+  margin: -8px 4px 0;
+}
+
+.auth-notice {
+  color: #2e7d32;
+  font-size: 0.9rem;
+  margin: -8px 4px 0;
+}
+
+.forgot-link {
+  border: none;
+  background: transparent;
+  color: #b44109;
+  text-align: left;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0 4px;
+  margin-top: -6px;
+}
+
+.forgot-link:hover {
+  color: #8f3507;
+}
+
 /* Submit Button */
 .submit-btn {
   background-color: #c9302c;
@@ -208,6 +246,11 @@
 
 .submit-btn:active {
   transform: scale(0.97);
+}
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
 /* Responsive break for small screens */

@@ -1,24 +1,150 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import './AuthPage.css'; 
 
 export default function AuthPage() {
-  const [isLogin, setIsLogin] = useState(true);
+  const [mode, setMode] = useState('login');
+  const [step, setStep] = useState('entry');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [code, setCode] = useState('');
+  const [error, setError] = useState('');
+  const [notice, setNotice] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
+  const {
+    requestSignupCode,
+    completeSignup,
+    login,
+    requestPasswordResetCode,
+    verifyPasswordResetCode,
+    changePassword,
+    isAuthenticated,
+    isLoading
+  } = useAuth();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const isLogin = mode === 'login';
+  const isSignup = mode === 'signup';
+  const isForgot = mode === 'forgot';
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/home');
+    }
+  }, [isAuthenticated, navigate]);
+
+  const resetMessages = () => {
+    setError('');
+    setNotice('');
+  };
+
+  const switchMode = (nextMode) => {
+    setMode(nextMode);
+    setStep('entry');
+    setCode('');
+    setPassword('');
+    setNewPassword('');
+    setConfirmPassword('');
+    resetMessages();
+  };
+
+  const handleEntrySubmit = async () => {
+    if (!email.trim()) {
+      throw new Error('Please enter your email.');
+    }
+
+    if (isSignup && !name.trim()) {
+      throw new Error('Please enter your name.');
+    }
+
+    if (isSignup && password.length < 6) {
+      throw new Error('Password must be at least 6 characters.');
+    }
+
+    if (isSignup) {
+      await requestSignupCode({ email, name });
+      setNotice('We sent a 6-digit code to your email. Enter it below to finish sign up.');
+      setStep('verify');
+      return;
+    }
+
     if (isLogin) {
-      console.log("Logging in with:", email, password);
-      navigate('/home'); 
-    } else {
-      console.log("Signing up:", name, email, password);
-      setIsLogin(true);
+      if (password.length < 6) {
+        throw new Error('Please enter your password.');
+      }
+      await login({ email, password });
+      navigate('/home');
+      return;
+    }
+
+    await requestPasswordResetCode({ email });
+    setNotice('We sent a 6-digit reset code to your email.');
+    setStep('verify');
+  };
+
+  const handleVerifySubmit = async () => {
+    if (code.trim().length !== 6) {
+      throw new Error('Please enter the 6-digit code.');
+    }
+
+    if (isSignup) {
+      await completeSignup({ email, code, name, password });
+      setNotice('Account verified. You are now logged in.');
+      navigate('/home');
+      return;
+    }
+
+    await verifyPasswordResetCode({ email, code });
+    setNotice('Code verified. You can now set a new password.');
+    setStep('resetPassword');
+  };
+
+  const handleResetPasswordSubmit = async () => {
+    if (newPassword.length < 6) {
+      throw new Error('New password must be at least 6 characters.');
+    }
+
+    if (newPassword !== confirmPassword) {
+      throw new Error('Passwords do not match.');
+    }
+
+    await changePassword({ newPassword });
+    setNotice('Password updated successfully. You can now log in.');
+    setMode('login');
+    setStep('entry');
+    setCode('');
+    setPassword('');
+    setNewPassword('');
+    setConfirmPassword('');
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    resetMessages();
+    setIsSubmitting(true);
+
+    try {
+      if (step === 'entry') {
+        await handleEntrySubmit();
+      } else if (step === 'verify') {
+        await handleVerifySubmit();
+      } else {
+        await handleResetPasswordSubmit();
+      }
+    } catch (err) {
+      setError(err.message || 'Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
+
+  if (isLoading) {
+    return null;
+  }
 
   return (
     <div className="auth-page-wrapper">
@@ -36,29 +162,33 @@ export default function AuthPage() {
         {/* RIGHT SIDE: The Form (White) */}
         <div className="split-right">
           <div className="auth-toggle-wrapper">
-            <div className="auth-toggle">
-              <button 
-                type="button"
-                className={`toggle-btn ${!isLogin ? 'active' : ''}`} 
-                onClick={() => setIsLogin(false)}
-              >
-                sign up
-              </button>
-              <button 
-                type="button"
-                className={`toggle-btn ${isLogin ? 'active' : ''}`} 
-                onClick={() => setIsLogin(true)}
-              >
-                login
-              </button>
-              <div className={`toggle-indicator ${isLogin ? 'right' : 'left'}`}></div>
-            </div>
+            {isForgot ? (
+              <h3 className="forgot-header">Forgot Password</h3>
+            ) : (
+              <div className="auth-toggle">
+                <button 
+                  type="button"
+                  className={`toggle-btn ${isSignup ? 'active' : ''}`} 
+                  onClick={() => switchMode('signup')}
+                >
+                  Sign Up
+                </button>
+                <button 
+                  type="button"
+                  className={`toggle-btn ${isLogin ? 'active' : ''}`} 
+                  onClick={() => switchMode('login')}
+                >
+                  Login
+                </button>
+                <div className={`toggle-indicator ${isLogin ? 'right' : 'left'}`}></div>
+              </div>
+            )}
           </div>
 
           <form onSubmit={handleSubmit} className="auth-form">
-            {!isLogin && (
+            {isSignup && step === 'entry' && (
               <div className="input-field">
-                <label>name &#9656;</label>
+                <label>Name &#9656;</label>
                 <input 
                   type="text" 
                   placeholder="John Doe"
@@ -69,30 +199,108 @@ export default function AuthPage() {
               </div>
             )}
 
-            <div className="input-field">
-              <label>e-mail &#9656;</label>
-              <input 
-                type="email" 
-                placeholder="example@email.com"
-                value={email} 
-                onChange={(e) => setEmail(e.target.value)} 
-                required 
-              />
-            </div>
+            {step === 'entry' && (
+              <>
+                <div className="input-field">
+                  <label>Email &#9656;</label>
+                  <input 
+                    type="email" 
+                    placeholder="example@email.com"
+                    value={email} 
+                    onChange={(e) => setEmail(e.target.value)} 
+                    required 
+                  />
+                </div>
+
+                {(isSignup || isLogin) && (
+                  <div className="input-field">
+                    <label>Password &#9656;</label>
+                    <input 
+                      type="password" 
+                      placeholder={isSignup ? 'Create a password' : 'Enter your password'}
+                      value={password} 
+                      onChange={(e) => setPassword(e.target.value)} 
+                      required 
+                    />
+                  </div>
+                )}
+              </>
+            )}
+
+            {step === 'verify' && (
+              <div className="input-field">
+                <label>Code &#9656;</label>
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  pattern="[0-9]{6}"
+                  maxLength={6}
+                  placeholder="Enter 6-digit code"
+                  value={code}
+                  onChange={(e) => setCode(e.target.value.replace(/\D/g, ''))}
+                  required
+                />
+              </div>
+            )}
+
+            {step === 'resetPassword' && (
+              <>
+                <div className="input-field">
+                  <label>New Pass &#9656;</label>
+                  <input
+                    type="password"
+                    placeholder="Enter new password"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="input-field">
+                  <label>Confirm &#9656;</label>
+                  <input
+                    type="password"
+                    placeholder="Confirm new password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                  />
+                </div>
+              </>
+            )}
+
+            {error && <p className="auth-error">{error}</p>}
+            {notice && <p className="auth-notice">{notice}</p>}
+
+            {step === 'entry' && isLogin && (
+              <button
+                type="button"
+                className="forgot-link"
+                onClick={() => switchMode('forgot')}
+              >
+                Forgot Password?
+              </button>
+            )}
+
+            {isForgot && step !== 'resetPassword' && (
+              <button
+                type="button"
+                className="forgot-link"
+                onClick={() => switchMode('login')}
+              >
+                Back to Login
+              </button>
+            )}
             
-            <div className="input-field">
-              <label>password &#9656;</label>
-              <input 
-                type="password" 
-                placeholder={isLogin ? "enter your password" : "confirm"}
-                value={password} 
-                onChange={(e) => setPassword(e.target.value)} 
-                required 
-              />
-            </div>
-            
-            <button type="submit" className="submit-btn">
-              {isLogin ? 'log in' : 'sign up'} &#9656;
+            <button type="submit" className="submit-btn" disabled={isSubmitting}>
+              {isSubmitting
+                ? 'Please wait...'
+                : step === 'entry'
+                  ? isLogin
+                    ? 'Login'
+                    : 'Send Code'
+                  : step === 'verify'
+                    ? 'Verify Code'
+                    : 'Update Password'} &#9656;
             </button>
           </form>
         </div>
