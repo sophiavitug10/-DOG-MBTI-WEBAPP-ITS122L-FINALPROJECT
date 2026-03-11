@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-ro
 import { QuizProvider } from './context/QuizContext';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import AdminRoute from './components/AdminRoute';
 
 // User Pages
 import AuthPage from './pages/AuthPage'; 
@@ -48,11 +49,11 @@ function App() {
               <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
               <Route path="/breeds" element={<ProtectedRoute><BreedProfiles /></ProtectedRoute>} />
 
-              <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
-              <Route path="/admin/breeds" element={<ProtectedRoute><AdminManageBreeds /></ProtectedRoute>} />
-              <Route path="/admin/questions" element={<ProtectedRoute><AdminManageQuestions /></ProtectedRoute>} />
-              <Route path="/admin/users" element={<ProtectedRoute><AdminManageUsers /></ProtectedRoute>} />
-              <Route path="/admin/inquiries" element={<ProtectedRoute><AdminInquiries /></ProtectedRoute>} />
+              <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
+              <Route path="/admin/breeds" element={<AdminRoute><AdminManageBreeds /></AdminRoute>} />
+              <Route path="/admin/questions" element={<AdminRoute><AdminManageQuestions /></AdminRoute>} />
+              <Route path="/admin/users" element={<AdminRoute><AdminManageUsers /></AdminRoute>} />
+              <Route path="/admin/inquiries" element={<AdminRoute><AdminInquiries /></AdminRoute>} />
 
               <Route path="*" element={<NotFound />} />
             </Routes>

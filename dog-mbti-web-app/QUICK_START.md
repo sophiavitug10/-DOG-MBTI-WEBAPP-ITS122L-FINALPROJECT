@@ -22,6 +22,10 @@ The app will be available at `http://localhost:5173` (or the port shown in termi
 npm run build
 ```
 
+### 4. Deploy to Vercel
+- Follow [DEPLOY_VERCEL.md](DEPLOY_VERCEL.md)
+- Set `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` in Vercel environment variables
+
 ---
 
 ## App Routes

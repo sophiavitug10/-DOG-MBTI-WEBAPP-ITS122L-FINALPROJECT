@@ -12,6 +12,7 @@ export default function AuthPage() {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [code, setCode] = useState('');
+  const [resendSeconds, setResendSeconds] = useState(0);
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -37,6 +38,18 @@ export default function AuthPage() {
     }
   }, [isAuthenticated, navigate]);
 
+  useEffect(() => {
+    if (resendSeconds <= 0) {
+      return undefined;
+    }
+
+    const timer = setInterval(() => {
+      setResendSeconds((prev) => (prev <= 1 ? 0 : prev - 1));
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [resendSeconds]);
+
   const resetMessages = () => {
     setError('');
     setNotice('');
@@ -49,7 +62,19 @@ export default function AuthPage() {
     setPassword('');
     setNewPassword('');
     setConfirmPassword('');
+    setResendSeconds(0);
     resetMessages();
+  };
+
+  const sendVerificationCode = async () => {
+    if (isSignup) {
+      await requestSignupCode({ email, name });
+      setNotice('We sent a 6-digit code to your email. Enter it below to finish sign up.');
+      return;
+    }
+
+    await requestPasswordResetCode({ email });
+    setNotice('We sent a 6-digit reset code to your email.');
   };
 
   const handleEntrySubmit = async () => {
@@ -66,9 +91,9 @@ export default function AuthPage() {
     }
 
     if (isSignup) {
-      await requestSignupCode({ email, name });
-      setNotice('We sent a 6-digit code to your email. Enter it below to finish sign up.');
+      await sendVerificationCode();
       setStep('verify');
+      setResendSeconds(30);
       return;
     }
 
@@ -81,9 +106,27 @@ export default function AuthPage() {
       return;
     }
 
-    await requestPasswordResetCode({ email });
-    setNotice('We sent a 6-digit reset code to your email.');
+    await sendVerificationCode();
     setStep('verify');
+    setResendSeconds(30);
+  };
+
+  const handleResendCode = async () => {
+    if (resendSeconds > 0) {
+      return;
+    }
+
+    resetMessages();
+    setIsSubmitting(true);
+
+    try {
+      await sendVerificationCode();
+      setResendSeconds(30);
+    } catch (err) {
+      setError(err.message || 'Failed to resend code.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleVerifySubmit = async () => {
@@ -228,19 +271,36 @@ export default function AuthPage() {
             )}
 
             {step === 'verify' && (
-              <div className="input-field">
-                <label>Code &#9656;</label>
-                <input
-                  type="text"
-                  inputMode="numeric"
-                  pattern="[0-9]{6}"
-                  maxLength={6}
-                  placeholder="Enter 6-digit code"
-                  value={code}
-                  onChange={(e) => setCode(e.target.value.replace(/\D/g, ''))}
-                  required
-                />
-              </div>
+              <>
+                <div className="input-field">
+                  <label>Code &#9656;</label>
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    pattern="[0-9]{6}"
+                    maxLength={6}
+                    placeholder="Enter 6-digit code"
+                    value={code}
+                    onChange={(e) => setCode(e.target.value.replace(/\D/g, ''))}
+                    required
+                  />
+                </div>
+                <div className="code-actions">
+                  <span className="code-status">
+                    {resendSeconds > 0
+                      ? `Resend available in ${resendSeconds}s`
+                      : 'Didn\'t receive a code?'}
+                  </span>
+                  <button
+                    type="button"
+                    className="resend-link"
+                    onClick={handleResendCode}
+                    disabled={resendSeconds > 0 || isSubmitting}
+                  >
+                    Resend Code
+                  </button>
+                </div>
+              </>
             )}
 
             {step === 'resetPassword' && (

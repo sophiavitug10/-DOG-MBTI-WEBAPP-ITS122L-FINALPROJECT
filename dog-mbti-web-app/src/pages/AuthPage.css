@@ -224,6 +224,33 @@
   color: #8f3507;
 }
 
+.code-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -10px;
+  padding: 0 4px;
+}
+
+.code-status {
+  color: #6f6258;
+  font-size: 0.84rem;
+}
+
+.resend-link {
+  border: none;
+  background: transparent;
+  color: #b44109;
+  font-size: 0.84rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.resend-link:disabled {
+  color: #b6aba1;
+  cursor: not-allowed;
+}
+
 /* Submit Button */
 .submit-btn {
   background-color: #c9302c;
