@@ -25,6 +25,11 @@ const NavBar = () => {
 
   const handleProfile = () => {
     setIsMenuOpen(false);
+    navigate('/profile');
+  };
+
+  const handleResults = () => {
+    setIsMenuOpen(false);
     navigate('/results');
   };
 
@@ -93,6 +98,9 @@ const NavBar = () => {
             <div className="profile-dropdown">
               <button type="button" className="profile-action" onClick={handleProfile}>
                 Profile
+              </button>
+              <button type="button" className="profile-action" onClick={handleResults}>
+                Results
               </button>
               <button type="button" className="profile-action danger" onClick={handleLogout}>
                 Logout

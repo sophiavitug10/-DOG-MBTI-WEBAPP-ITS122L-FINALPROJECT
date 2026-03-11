@@ -11,52 +11,66 @@ export default function QuizPage() {
   const { submitQuiz } = useQuiz();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState([]);
-  const [showProgress, setShowProgress] = useState(true);
+  const [interactionError, setInteractionError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleAnswerSelect = (value) => {
     const newAnswer = {
       questionId: quizQuestions[currentQuestion].id,
-      value: value
+      value
     };
-    
-    const updatedAnswers = [...answers, newAnswer];
-    setAnswers(updatedAnswers);
 
-    if (currentQuestion < quizQuestions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
-    } else {
-      // Quiz completed
-      completeQuiz(updatedAnswers);
+    const updatedAnswers = [...answers];
+    updatedAnswers[currentQuestion] = newAnswer;
+    setAnswers(updatedAnswers);
+    setInteractionError('');
+  };
+
+  const completeQuiz = async (finalAnswers) => {
+    setIsSubmitting(true);
+
+    try {
+      const result = processDogMBTIQuiz(finalAnswers);
+      const saved = await submitQuiz(finalAnswers, result.mbtiType, result.compatibleBreed, result.traitScores);
+      navigate(`/results/${saved.id}`);
+    } catch (error) {
+      setInteractionError(error.message || 'Failed to submit quiz. Please try again.');
+      setIsSubmitting(false);
     }
   };
 
-  const completeQuiz = (finalAnswers) => {
-    // Process quiz results
-    const result = processDogMBTIQuiz(finalAnswers);
-    
-    // Store in context
-    submitQuiz(finalAnswers, result.mbtiType, result.compatibleBreed, result.traitScores);
-    
-    // Navigate to results
-    navigate('/results');
-  };
+  const handleNext = () => {
+    if (!answers[currentQuestion]) {
+      setInteractionError('Select an answer before moving to the next question.');
+      return;
+    }
 
-  const handleSkipQuestion = () => {
-    // Skip to next question without answering
     if (currentQuestion < quizQuestions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
+      setCurrentQuestion((prev) => prev + 1);
+      setInteractionError('');
     }
   };
 
   const handleGoBack = () => {
     if (currentQuestion > 0) {
       setCurrentQuestion(currentQuestion - 1);
-      setAnswers(answers.slice(0, -1));
+      setInteractionError('');
     }
+  };
+
+  const handleSubmitQuiz = () => {
+    const allAnswered = answers.filter(Boolean);
+    if (allAnswered.length !== quizQuestions.length) {
+      setInteractionError('Please answer all questions before submitting.');
+      return;
+    }
+    completeQuiz(allAnswered);
   };
 
   const question = quizQuestions[currentQuestion];
   const progress = ((currentQuestion + 1) / quizQuestions.length) * 100;
+  const selectedValue = answers[currentQuestion]?.value;
+  const isLastQuestion = currentQuestion === quizQuestions.length - 1;
 
   return (
     <>
@@ -86,7 +100,7 @@ export default function QuizPage() {
               {question.options.map((option, idx) => (
                 <button
                   key={idx}
-                  className="option-button"
+                  className={`option-button ${selectedValue === option.value ? 'selected' : ''}`}
                   onClick={() => handleAnswerSelect(option.value)}
                 >
                   <span className="option-radio"></span>
@@ -95,7 +109,8 @@ export default function QuizPage() {
               ))}
             </div>
 
-            {/* Navigation Buttons */}
+            {interactionError && <p className="interaction-error">{interactionError}</p>}
+
             <div className="quiz-navigation">
               <button
                 className="nav-button back-btn"
@@ -105,20 +120,19 @@ export default function QuizPage() {
                 ← Back
               </button>
               
-              <div className="nav-info">
-                {currentQuestion > 0 && (
-                  <span className="answered-count">
-                    {currentQuestion} answer{currentQuestion !== 1 ? 's' : ''} recorded
-                  </span>
-                )}
-              </div>
+              <div className="nav-info"></div>
 
-              {currentQuestion === quizQuestions.length - 1 && answers.length === currentQuestion + 1 && (
+              {!isLastQuestion ? (
+                <button className="nav-button submit-btn" onClick={handleNext}>
+                  Next →
+                </button>
+              ) : (
                 <button
                   className="nav-button submit-btn"
-                  onClick={() => completeQuiz(answers)}
+                  onClick={handleSubmitQuiz}
+                  disabled={isSubmitting}
                 >
-                  See Results →
+                  {isSubmitting ? 'Submitting...' : 'Submit Quiz →'}
                 </button>
               )}
             </div>

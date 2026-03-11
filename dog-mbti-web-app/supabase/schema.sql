@@ -125,6 +125,11 @@ as $$
 begin
   update public.profiles
   set email = new.email,
+      full_name = coalesce(
+        new.raw_user_meta_data ->> 'full_name',
+        new.raw_user_meta_data ->> 'name',
+        full_name
+      ),
       updated_at = now()
   where id = new.id;
   return new;
@@ -133,5 +138,5 @@ $$;
 
 drop trigger if exists on_auth_user_updated on auth.users;
 create trigger on_auth_user_updated
-after update of email on auth.users
+after update of email, raw_user_meta_data on auth.users
 for each row execute procedure public.handle_auth_user_updated();

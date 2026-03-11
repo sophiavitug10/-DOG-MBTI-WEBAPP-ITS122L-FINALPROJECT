@@ -93,6 +93,26 @@ export const updatePassword = async ({ newPassword }) => {
 	return mapUser(data.user ?? null);
 };
 
+export const updateProfile = async ({ name, email, newPassword }) => {
+	const payload = {
+		data: {
+			full_name: name
+		}
+	};
+
+	if (email) {
+		payload.email = email;
+	}
+
+	if (newPassword) {
+		payload.password = newPassword;
+	}
+
+	const { data, error } = await supabase.auth.updateUser(payload);
+	throwIfError(error, 'Failed to update profile.');
+	return mapUser(data.user ?? null);
+};
+
 export const logout = async () => {
 	const { error } = await supabase.auth.signOut();
 	throwIfError(error, 'Failed to log out.');

@@ -1,0 +1,108 @@
+@import './ResultsPage.css';
+
+.results-container {
+	max-width: 980px;
+}
+
+.results-header {
+	border-radius: 22px;
+	padding: 30px 28px;
+	margin-bottom: 26px;
+}
+
+.mbti-result-card {
+	border-left: none;
+	border: 1px solid #eadccb;
+	border-radius: 18px;
+	box-shadow: 0 14px 30px rgba(35, 24, 12, 0.1);
+	background: radial-gradient(circle at top right, #fff7ee 0%, #ffffff 62%);
+	margin-bottom: 26px;
+}
+
+.mbti-type-display h2 {
+	color: #2f2418;
+	font-size: 1.7rem;
+}
+
+.mbti-value {
+	border-radius: 999px;
+	padding: 4px 13px;
+	font-size: 1.05rem;
+}
+
+.mbti-description {
+	background: #fff9f2;
+	border: 1px solid #f1dfcc;
+	border-radius: 12px;
+	color: #594838;
+}
+
+.compatible-breed-section {
+	margin-bottom: 26px;
+}
+
+.compatible-breed-section h2,
+.chart-section h2,
+.answers-section h2 {
+	text-align: left;
+	margin-bottom: 14px;
+	font-size: 1.45rem;
+	color: #2f2418;
+}
+
+.breed-image-showcase {
+	height: 380px;
+	border-radius: 18px;
+	margin-bottom: 18px;
+}
+
+.breed-result-card {
+	border-radius: 18px;
+	border: 1px solid #ebddcb;
+	box-shadow: 0 14px 28px rgba(35, 24, 12, 0.09);
+}
+
+.breed-result-info h3 {
+	font-size: 1.85rem;
+	color: #2f2418;
+}
+
+.breed-result-description {
+	color: #5f5042;
+}
+
+.chart-section {
+	border-radius: 18px;
+	border: 1px solid #ebddcb;
+	box-shadow: 0 14px 28px rgba(35, 24, 12, 0.09);
+	margin-bottom: 26px;
+}
+
+.answers-section {
+	margin-bottom: 28px;
+}
+
+.answer-item {
+	border-radius: 12px;
+	border: 1px solid #e8dbc9;
+	background: #fffdf9;
+	box-shadow: 0 6px 14px rgba(35, 24, 12, 0.05);
+}
+
+.answer-question {
+	color: #3e2f20;
+}
+
+.answer-choice {
+	color: #645546;
+}
+
+@media (max-width: 768px) {
+	.breed-image-showcase {
+		height: 260px;
+	}
+
+	.mbti-type-display h2 {
+		font-size: 1.32rem;
+	}
+}

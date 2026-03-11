@@ -7,6 +7,7 @@ import {
 	onAuthStateChange,
 	sendPasswordResetCode,
 	sendSignupCode,
+	updateProfile as updateProfileService,
 	updatePassword,
 	verifyResetCode
 } from '../services/authService';
@@ -77,6 +78,12 @@ export const AuthProvider = ({ children }) => {
 		return updatedUser;
 	};
 
+	const updateProfile = async (payload) => {
+		const updatedUser = await updateProfileService(payload);
+		setUser(updatedUser);
+		return updatedUser;
+	};
+
 	const logout = async () => {
 		await logoutService();
 		setUser(null);
@@ -93,6 +100,7 @@ export const AuthProvider = ({ children }) => {
 			requestPasswordResetCode,
 			verifyPasswordResetCode,
 			changePassword,
+			updateProfile,
 			logout
 		}),
 		[user, isLoading]

@@ -9,6 +9,8 @@ import HomePage from './pages/HomePage';
 import QuizPage from './pages/QuizPage';
 import BreedProfiles from './pages/BreedProfiles';
 import ResultsPage from './pages/ResultsPage';
+import ResultDetailPage from './pages/ResultDetailPage';
+import ProfilePage from './pages/ProfilePage';
 
 // Admin Pages
 import AdminDashboard from './pages/AdminDashboard';
@@ -42,6 +44,8 @@ function App() {
               <Route path="/home" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
               <Route path="/quiz" element={<ProtectedRoute><QuizPage /></ProtectedRoute>} />
               <Route path="/results" element={<ProtectedRoute><ResultsPage /></ProtectedRoute>} />
+              <Route path="/results/:resultId" element={<ProtectedRoute><ResultDetailPage /></ProtectedRoute>} />
+              <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
               <Route path="/breeds" element={<ProtectedRoute><BreedProfiles /></ProtectedRoute>} />
 
               <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
