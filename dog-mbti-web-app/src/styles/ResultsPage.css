@@ -79,14 +79,21 @@
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
-  padding: 0;
+  padding: 30px;
+}
+
+.breed-image-showcase {
+  width: 100%;
+  height: 500px;
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
 .breed-image-container {
   overflow: hidden;
+  min-height: 450px;
 }
 
 .breed-result-image {
@@ -96,15 +103,19 @@
   transition: transform 0.3s ease;
 }
 
+.breed-image-showcase:hover .breed-result-image {
+  transform: scale(1.05);
+}
+
 .breed-result-card:hover .breed-result-image {
   transform: scale(1.05);
 }
 
 .breed-result-info {
-  padding: 30px;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .breed-result-info h3 {
@@ -336,8 +347,9 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .breed-result-card {
-    grid-template-columns: 1fr;
+  .breed-image-showcase {
+    height: 350px;
+    margin-bottom: 30px;
   }
 
   .results-header h1 {

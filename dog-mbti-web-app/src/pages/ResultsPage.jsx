@@ -15,6 +15,30 @@ import {
 } from 'chart.js';
 import '../styles/ResultsPage.css';
 
+// Import all dog images
+import GoldenRetriever from '../assets/Golden_Retriever.png';
+import GermanShepherd from '../assets/German_Shepherd.png';
+import Labrador from '../assets/Labrador.png';
+import Husky from '../assets/Husky.png';
+import Dobermann from '../assets/Dobermann.png';
+import FrenchBulldog from '../assets/French_Bulldog.png';
+import Pug from '../assets/Pug.png';
+import BorderCollie from '../assets/Border_Collie.png';
+import KingCharles from '../assets/King_Charles.png';
+
+// Map image names to imported images
+const imageMap = {
+  'Golden_Retriever.png': GoldenRetriever,
+  'German_Shepherd.png': GermanShepherd,
+  'Labrador.png': Labrador,
+  'Husky.png': Husky,
+  'Dobermann.png': Dobermann,
+  'French_Bulldog.png': FrenchBulldog,
+  'Pug.png': Pug,
+  'Border_Collie.png': BorderCollie,
+  'King_Charles.png': KingCharles
+};
+
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 export default function ResultsPage() {
@@ -131,47 +155,52 @@ export default function ResultsPage() {
         <div className="compatible-breed-section">
           <h2>Your Compatible Dog Breed</h2>
           {compatibleBreed ? (
-            <div className="breed-result-card">
-              <div className="breed-image-container">
+            <>
+              {/* Breed Image Section */}
+              <div className="breed-image-showcase">
                 <img
-                  src={`/assets/${compatibleBreed.image}`}
+                  src={imageMap[compatibleBreed.image]}
                   alt={compatibleBreed.name}
                   className="breed-result-image"
                 />
               </div>
-              <div className="breed-result-info">
-                <h3>{compatibleBreed.name}</h3>
-                <p className="breed-mbti-match">
-                  MBTI Match: <strong>{compatibleBreed.mbtiType}</strong>
-                </p>
-                <p className="breed-result-description">{compatibleBreed.description}</p>
 
-                <div className="breed-characteristics">
-                  <h4>Why This Breed Matches You:</h4>
-                  <ul>
-                    {compatibleBreed.characteristics.map((char, idx) => (
-                      <li key={idx}>{char}</li>
-                    ))}
-                  </ul>
-                </div>
+              {/* Breed Info Section */}
+              <div className="breed-result-card">
+                <div className="breed-result-info">
+                  <h3>{compatibleBreed.name}</h3>
+                  <p className="breed-mbti-match">
+                    MBTI Match: <strong>{compatibleBreed.mbtiType}</strong>
+                  </p>
+                  <p className="breed-result-description">{compatibleBreed.description}</p>
 
-                <div className="breed-traits">
-                  <h4>Key Traits:</h4>
-                  <div className="traits-list">
-                    {compatibleBreed.traits.map((trait, idx) => (
-                      <span key={idx} className="trait-badge">{trait}</span>
-                    ))}
+                  <div className="breed-characteristics">
+                    <h4>Why This Breed Matches You:</h4>
+                    <ul>
+                      {compatibleBreed.characteristics.map((char, idx) => (
+                        <li key={idx}>{char}</li>
+                      ))}
+                    </ul>
+                    </div>
+
+                  <div className="breed-traits">
+                    <h4>Key Traits:</h4>
+                    <div className="traits-list">
+                      {compatibleBreed.traits.map((trait, idx) => (
+                        <span key={idx} className="trait-badge">{trait}</span>
+                      ))}
+                    </div>
                   </div>
-                </div>
 
-                <button
-                  onClick={() => navigate('/breeds')}
-                  className="explore-btn"
-                >
-                  Learn More in Breed Profiles →
-                </button>
+                  <button
+                    onClick={() => navigate('/breeds')}
+                    className="explore-btn"
+                  >
+                    Learn More in Breed Profiles →
+                  </button>
+                </div>
               </div>
-            </div>
+            </>
           ) : (
             <p className="no-breed-match">No matching breed found. Please retake the quiz.</p>
           )}

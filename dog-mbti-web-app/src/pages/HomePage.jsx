@@ -4,6 +4,30 @@ import NavBar from '../components/NavBar';
 import { dogBreeds } from '../data/breeds';
 import '../styles/HomePage.css';
 
+// Import all dog images
+import GoldenRetriever from '../assets/Golden_Retriever.png';
+import GermanShepherd from '../assets/German_Shepherd.png';
+import Labrador from '../assets/Labrador.png';
+import Husky from '../assets/Husky.png';
+import Dobermann from '../assets/Dobermann.png';
+import FrenchBulldog from '../assets/French_Bulldog.png';
+import Pug from '../assets/Pug.png';
+import BorderCollie from '../assets/Border_Collie.png';
+import KingCharles from '../assets/King_Charles.png';
+
+// Map image names to imported images
+const imageMap = {
+  'Golden_Retriever.png': GoldenRetriever,
+  'German_Shepherd.png': GermanShepherd,
+  'Labrador.png': Labrador,
+  'Husky.png': Husky,
+  'Dobermann.png': Dobermann,
+  'French_Bulldog.png': FrenchBulldog,
+  'Pug.png': Pug,
+  'Border_Collie.png': BorderCollie,
+  'King_Charles.png': KingCharles
+};
+
 export default function HomePage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
@@ -39,7 +63,7 @@ export default function HomePage() {
             <div className="carousel-content">
               <div className="breed-card-large">
                 <img 
-                  src={`/assets/${currentBreed.image}`}
+                  src={imageMap[currentBreed.image]}
                   alt={currentBreed.name}
                   className="breed-image-large"
                 />
