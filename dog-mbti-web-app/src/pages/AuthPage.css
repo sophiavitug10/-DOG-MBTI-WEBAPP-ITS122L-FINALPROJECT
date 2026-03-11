@@ -1,11 +1,14 @@
-/* Full page background */
+/* Full page background fix */
 .auth-page-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background-color: #f28b3a;
+  height: 100vh;      /* Fixed from min-height to ensure strict background sizing */
+  width: 100vw;       /* Added to ensure it covers the full width */
+  margin: 0;
   padding: 0;
+  background-color: #f28b3a;
+  overflow: hidden;   /* Prevents unwanted scrollbars */
 }
 
 /* The main white card with split layout */
@@ -13,17 +16,23 @@
   display: flex;
   background: white;
   width: 100%;
-  max-width: 100%;
+  height: 100%;       /* Fixed to fill the wrapper perfectly */
   border-radius: 0;
   overflow: hidden;
   box-shadow: none;
-  min-height: 100vh;
 }
 
-/* Left side (Graphic) */
 .split-left {
-  flex: 1.2;
-  background: linear-gradient(160deg, #e65c00 0%, #f97316 40%, #ffb347 80%, #ffd580 100%);
+  flex: 1.5; 
+  
+  /* Adds a subtle dark gradient over the image so your white text is still readable */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.7)), 
+              url('../assets/Golden_Retriever.png');
+  
+  background-size: cover;      /* Ensures the image covers the entire left container */
+  background-position: center; /* Keeps the main part of the image centered */
+  background-repeat: no-repeat;/* Prevents the image from tiling */
+  
   color: white;
   padding: 80px 70px;
   display: flex;
@@ -33,7 +42,7 @@
   overflow: hidden;
 }
 
-/* Decorative circle blobs on the left side like the inspo */
+/* Decorative circle blobs on the left side */
 .split-left::before {
   content: '';
   position: absolute;
@@ -76,13 +85,14 @@
   z-index: 1;
 }
 
-/* Right side (Form) */
+/* Right side (Form - Now proportionally smaller) */
 .split-right {
-  flex: 1.4;
+  flex: 1;            /* Decreased from 1.4 so the left side takes up more space */
   padding: 80px 90px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center; /* Centers the form nicely in the smaller space */
   background: #ffffff;
 }
 
@@ -91,8 +101,8 @@
   margin-bottom: 45px;
   border-bottom: 2px solid #e0e0e0;
   padding-bottom: 5px;
-  align-self: flex-start;
-  width: 75%;
+  width: 100%;
+  max-width: 400px;   /* Added max-width for better proportion */
 }
 
 .auth-toggle {
@@ -140,7 +150,8 @@
   display: flex;
   flex-direction: column;
   gap: 22px;
-  width: 75%;
+  width: 100%;
+  max-width: 400px;   /* Added max-width to keep inputs looking tight */
 }
 
 .input-field {
@@ -203,19 +214,16 @@
 @media (max-width: 768px) {
   .split-card {
     flex-direction: column;
-    min-height: 100vh;
   }
   .split-left {
     flex: none;
-    min-height: 280px;
+    height: 40vh;       /* Gives a fixed height to the orange part on mobile */
     padding: 40px 30px;
     justify-content: flex-end;
   }
   .split-right {
+    flex: none;
+    height: 60vh;       /* Gives the rest of the height to the form */
     padding: 40px 30px;
-  }
-  .auth-form,
-  .auth-toggle-wrapper {
-    width: 100%;
   }
 }

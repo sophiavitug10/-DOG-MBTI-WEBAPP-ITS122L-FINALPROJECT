@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './AuthPage.css'; // This imports the CSS file below
+import './AuthPage.css'; 
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
@@ -24,16 +24,16 @@ export default function AuthPage() {
     <div className="auth-page-wrapper">
       <div className="split-card">
         
-        {/* LEFT SIDE: Graphic/Image Area */}
+        {/* LEFT SIDE: Graphic/Image Area (Orange) */}
         <div className="split-left">
           <h2 className="split-title">{isLogin ? 'LOG IN' : 'SIGN UP'}</h2>
           <p className="split-desc">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Pawsonality helps you find your perfect furry companion based on your lifestyle, activity level, and personality.
           </p>
           {/* You can add your actual sphere image here as an <img> tag later */}
         </div>
 
-        {/* RIGHT SIDE: The Form */}
+        {/* RIGHT SIDE: The Form (White) */}
         <div className="split-right">
           <div className="auth-toggle-wrapper">
             <div className="auth-toggle">
