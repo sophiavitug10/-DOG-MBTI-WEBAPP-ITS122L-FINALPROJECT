@@ -1,7 +1,6 @@
-//sign up and login form in one page for the user to access their account or create a new one
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './AuthPage.css'; // Make sure to import the CSS file!
+import './AuthPage.css'; // This imports the CSS file below
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
@@ -14,85 +13,90 @@ export default function AuthPage() {
     e.preventDefault();
     if (isLogin) {
       console.log("Logging in with:", email, password);
-      // TODO: Add actual login authentication logic here
       navigate('/home'); 
     } else {
       console.log("Signing up:", name, email, password);
-      // TODO: Add actual signup logic here
       setIsLogin(true);
     }
   };
 
   return (
-    <div className="auth-container">
-      <div className="form-card">
+    <div className="auth-page-wrapper">
+      <div className="split-card">
         
-        {/* Updated Toggle Header */}
-        <div className="auth-toggle-wrapper">
-          <div className="auth-toggle">
-            <button 
-              type="button"
-              className={`toggle-btn ${!isLogin ? 'active' : ''}`} 
-              onClick={() => setIsLogin(false)}
-            >
-              sign up
-            </button>
-            <button 
-              type="button"
-              className={`toggle-btn ${isLogin ? 'active' : ''}`} 
-              onClick={() => setIsLogin(true)}
-            >
-              login
-            </button>
-            {/* The sliding orange line */}
-            <div className={`toggle-indicator ${isLogin ? 'right' : 'left'}`}></div>
-          </div>
+        {/* LEFT SIDE: Graphic/Image Area */}
+        <div className="split-left">
+          <h2 className="split-title">{isLogin ? 'LOG IN' : 'SIGN UP'}</h2>
+          <p className="split-desc">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          {/* You can add your actual sphere image here as an <img> tag later */}
         </div>
 
-        <p className="auth-subtitle">
-          {isLogin ? 'Log in to take the Dog MBTI Test and find your perfect match.' : 'Ready to discover your ideal dog breed?'}
-        </p>
-        
-        <form onSubmit={handleSubmit}>
-          {!isLogin && (
-            <div className="input-group">
-              <label>name</label>
+        {/* RIGHT SIDE: The Form */}
+        <div className="split-right">
+          <div className="auth-toggle-wrapper">
+            <div className="auth-toggle">
+              <button 
+                type="button"
+                className={`toggle-btn ${!isLogin ? 'active' : ''}`} 
+                onClick={() => setIsLogin(false)}
+              >
+                sign up
+              </button>
+              <button 
+                type="button"
+                className={`toggle-btn ${isLogin ? 'active' : ''}`} 
+                onClick={() => setIsLogin(true)}
+              >
+                login
+              </button>
+              <div className={`toggle-indicator ${isLogin ? 'right' : 'left'}`}></div>
+            </div>
+          </div>
+
+          <form onSubmit={handleSubmit} className="auth-form">
+            {!isLogin && (
+              <div className="input-field">
+                <label>name &#9656;</label>
+                <input 
+                  type="text" 
+                  placeholder="John Doe"
+                  value={name} 
+                  onChange={(e) => setName(e.target.value)} 
+                  required 
+                />
+              </div>
+            )}
+
+            <div className="input-field">
+              <label>e-mail &#9656;</label>
               <input 
-                type="text" 
-                placeholder="John Doe"
-                value={name} 
-                onChange={(e) => setName(e.target.value)} 
+                type="email" 
+                placeholder="example@email.com"
+                value={email} 
+                onChange={(e) => setEmail(e.target.value)} 
                 required 
               />
             </div>
-          )}
-
-          <div className="input-group">
-            <label>e-mail</label>
-            <input 
-              type="email" 
-              placeholder="example@email.com"
-              value={email} 
-              onChange={(e) => setEmail(e.target.value)} 
-              required 
-            />
-          </div>
-          
-          <div className="input-group">
-            <label>password</label>
-            <input 
-              type="password" 
-              placeholder={isLogin ? "enter your password" : "confirm"}
-              value={password} 
-              onChange={(e) => setPassword(e.target.value)} 
-              required 
-            />
-          </div>
-          
-          <button type="submit" className="primary-btn submit-btn">
-            {isLogin ? 'log in' : 'sign up'}
-          </button>
-        </form>
+            
+            <div className="input-field">
+              <label>password &#9656;</label>
+              <input 
+                type="password" 
+                placeholder={isLogin ? "enter your password" : "confirm"}
+                value={password} 
+                onChange={(e) => setPassword(e.target.value)} 
+                required 
+              />
+            </div>
+            
+            <button type="submit" className="submit-btn">
+              {isLogin ? 'log in' : 'sign up'} &#9656;
+            </button>
+          </form>
+        </div>
+        
       </div>
     </div>
   );
