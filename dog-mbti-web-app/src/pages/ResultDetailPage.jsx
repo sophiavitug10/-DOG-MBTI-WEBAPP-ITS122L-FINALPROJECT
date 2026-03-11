@@ -13,7 +13,7 @@ import {
 import NavBar from '../components/NavBar';
 import { useQuiz } from '../context/QuizContext';
 import { getMBTIDescription } from '../utils/mbtiCalculator';
-import { quizQuestions } from '../data/questions';
+import { getTraitScores, quizQuestions } from '../data/questions';
 import '../styles/ResultDetailPage.css';
 
 import GoldenRetriever from '../assets/Golden_Retriever.png';
@@ -62,7 +62,7 @@ export default function ResultDetailPage() {
     );
   }
 
-  const traitScores = result.traitScores || {
+  const baseTraitScores = result.traitScores || {
     extroversion: 0,
     introversion: 0,
     sensing: 0,
@@ -72,6 +72,22 @@ export default function ResultDetailPage() {
     judging: 0,
     perceiving: 0
   };
+
+  const hasStoredValues = Object.values(baseTraitScores).some((value) => Number(value) > 0);
+  const traitScores = hasStoredValues
+    ? baseTraitScores
+    : getTraitScores(Array.isArray(result.answers) ? result.answers : []);
+
+  const traitValueItems = [
+    { label: 'Extroversion (E)', value: traitScores.extroversion || 0 },
+    { label: 'Introversion (I)', value: traitScores.introversion || 0 },
+    { label: 'Sensing (S)', value: traitScores.sensing || 0 },
+    { label: 'Intuition (N)', value: traitScores.intuition || 0 },
+    { label: 'Thinking (T)', value: traitScores.thinking || 0 },
+    { label: 'Feeling (F)', value: traitScores.feeling || 0 },
+    { label: 'Judging (J)', value: traitScores.judging || 0 },
+    { label: 'Perceiving (P)', value: traitScores.perceiving || 0 }
+  ];
 
   const chartData = {
     labels: ['Extroversion', 'Introversion', 'Sensing', 'Intuition', 'Thinking', 'Feeling', 'Judging', 'Perceiving'],
@@ -158,6 +174,14 @@ export default function ResultDetailPage() {
           <h2>Personality Breakdown</h2>
           <div className="chart-container">
             <Bar data={chartData} options={chartOptions} />
+          </div>
+          <div className="trait-values-grid">
+            {traitValueItems.map((item) => (
+              <div key={item.label} className="trait-value-item">
+                <span>{item.label}</span>
+                <strong>{item.value}</strong>
+              </div>
+            ))}
           </div>
         </div>
 

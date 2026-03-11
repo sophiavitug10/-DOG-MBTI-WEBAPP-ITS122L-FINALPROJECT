@@ -78,6 +78,28 @@
 	margin-bottom: 26px;
 }
 
+.trait-values-grid {
+	margin-top: 16px;
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 10px;
+}
+
+.trait-value-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 12px;
+	border-radius: 10px;
+	border: 1px solid #e8dbc9;
+	background: #fffdf9;
+	color: #3e2f20;
+}
+
+.trait-value-item strong {
+	color: #2f2418;
+}
+
 .answers-section {
 	margin-bottom: 28px;
 }
@@ -104,5 +126,9 @@
 
 	.mbti-type-display h2 {
 		font-size: 1.32rem;
+	}
+
+	.trait-values-grid {
+		grid-template-columns: 1fr;
 	}
 }

@@ -282,6 +282,12 @@ li {
   background: #f6efe8;
 }
 
+.profile-divider {
+  height: 1px;
+  background: #efe6dc;
+  margin: 4px 2px;
+}
+
 .profile-action.danger {
   color: #b6232e;
 }

@@ -25,6 +25,20 @@ export const getCurrentUser = async () => {
 	return mapUser(data.session?.user ?? null);
 };
 
+export const getProfileRole = async (userId) => {
+	if (!userId) {
+		return 'user';
+	}
+
+	const { data, error } = await supabase.from('profiles').select('role').eq('id', userId).maybeSingle();
+
+	if (error) {
+		return 'user';
+	}
+
+	return data?.role || 'user';
+};
+
 export const sendSignupCode = async ({ email, name }) => {
 	const { error } = await supabase.auth.signInWithOtp({
 		email,

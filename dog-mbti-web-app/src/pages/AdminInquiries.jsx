@@ -1,67 +1,100 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import AdminLayout from '../components/AdminLayout';
+import { fetchAdminInquiries, updateInquiryStatus } from '../services/adminService';
 import '../styles/AdminPages.css';
 
 const AdminInquiries = () => {
-  // Mock data representing adoption inquiries
-  const [inquiries, setInquiries] = useState([
-    { id: 1, name: 'Juan Dela Cruz', contact: 'juan@email.com', breed: 'Basenji', date: '2026-03-10', status: 'Pending' },
-    { id: 2, name: 'Maria Santos', contact: '09123456789', breed: 'Lagotto Romagnolo', date: '2026-03-09', status: 'Contacted' },
-    { id: 3, name: 'Alex Reyes', contact: 'alex.r@email.com', breed: 'Greyhound', date: '2026-03-08', status: 'Resolved' }
-  ]);
+  const [inquiries, setInquiries] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState('');
 
-  const handleStatusChange = (id, newStatus) => {
-    setInquiries(inquiries.map(inquiry => 
-      inquiry.id === id ? { ...inquiry, status: newStatus } : inquiry
-    ));
+  useEffect(() => {
+    const loadInquiries = async () => {
+      setError('');
+      setIsLoading(true);
+      try {
+        const rows = await fetchAdminInquiries();
+        setInquiries(
+          rows.map((row) => ({
+            id: row.id,
+            name: row.full_name,
+            contact: row.contact_info,
+            breed: row.breed_name,
+            date: row.created_at,
+            status: row.status
+          }))
+        );
+      } catch (err) {
+        setError(err.message || 'Failed to load inquiries.');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadInquiries();
+  }, []);
+
+  const handleStatusChange = async (id, newStatus) => {
+    setError('');
+    const previous = inquiries;
+    setInquiries(inquiries.map((inquiry) => (inquiry.id === id ? { ...inquiry, status: newStatus } : inquiry)));
+
+    try {
+      await updateInquiryStatus(id, newStatus);
+    } catch (err) {
+      setInquiries(previous);
+      setError(err.message || 'Failed to update inquiry status.');
+    }
   };
 
   return (
-    <div className="admin-main">
+    <AdminLayout>
       <div className="admin-hero">
         <h2>Adoption Inquiries</h2>
         <p>Manage adoption requests from users who have completed the Pawsonality test.</p>
       </div>
 
-      <div className="admin-actions">
-        <Link to="/admin" className="admin-link" style={{ background: '#2f3b49', color: '#fff' }}>Back to Dashboard</Link>
-      </div>
+      {error && <p className="admin-error">{error}</p>}
 
       <div className="admin-table-wrap">
-      <table className="admin-table">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>User Name</th>
-            <th>Contact Info</th>
-            <th>Matched Breed</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {inquiries.map((inq) => (
-            <tr key={inq.id}>
-              <td>{inq.date}</td>
-              <td><strong>{inq.name}</strong></td>
-              <td>{inq.contact}</td>
-              <td>{inq.breed}</td>
-              <td>
-                <select 
-                  value={inq.status} 
-                  onChange={(e) => handleStatusChange(inq.id, e.target.value)}
-                  className="admin-select"
-                >
-                  <option value="Pending">Pending</option>
-                  <option value="Contacted">Contacted</option>
-                  <option value="Resolved">Resolved</option>
-                </select>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+        {isLoading ? (
+          <p className="admin-empty">Loading inquiries...</p>
+        ) : (
+          <table className="admin-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>User Name</th>
+                <th>Contact Info</th>
+                <th>Matched Breed</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {inquiries.map((inq) => (
+                <tr key={inq.id}>
+                  <td>{new Date(inq.date).toLocaleDateString()}</td>
+                  <td><strong>{inq.name}</strong></td>
+                  <td>{inq.contact}</td>
+                  <td>{inq.breed}</td>
+                  <td>
+                    <select
+                      value={inq.status}
+                      onChange={(e) => handleStatusChange(inq.id, e.target.value)}
+                      className="admin-select"
+                    >
+                      <option value="Pending">Pending</option>
+                      <option value="Contacted">Contacted</option>
+                      <option value="Resolved">Resolved</option>
+                    </select>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
-    </div>
+    </AdminLayout>
   );
 };
 

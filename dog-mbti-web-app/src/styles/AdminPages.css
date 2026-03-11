@@ -4,6 +4,7 @@
   display: grid;
   grid-template-columns: 260px 1fr;
   background: #f6f2ec;
+  width: min(1240px, 100%);
 }
 
 .admin-sidebar {
@@ -41,6 +42,14 @@
 
 .admin-main {
   padding: 28px;
+  width: 100%;
+}
+
+.admin-view-transition {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  animation: adminViewIn 0.32s ease-out;
 }
 
 .admin-hero {
@@ -50,6 +59,7 @@
   padding: 20px 22px;
   box-shadow: 0 10px 26px rgba(34, 23, 11, 0.08);
   margin-bottom: 20px;
+  min-height: 112px;
 }
 
 .admin-hero h1,
@@ -75,6 +85,7 @@
   border-radius: 14px;
   padding: 18px;
   box-shadow: 0 8px 20px rgba(34, 23, 11, 0.08);
+  min-height: 140px;
 }
 
 .admin-card h3 {
@@ -90,6 +101,11 @@
 
 .admin-actions {
   margin-bottom: 14px;
+}
+
+.admin-actions-row {
+  display: flex;
+  gap: 10px;
 }
 
 .admin-btn,
@@ -159,6 +175,7 @@
   border: 1px solid #ebdece;
   border-radius: 14px;
   overflow-x: auto;
+  min-height: 320px;
 }
 
 .admin-table {
@@ -208,13 +225,47 @@
   gap: 8px;
 }
 
+.admin-error {
+  margin: 0 0 12px;
+  color: #b42318;
+  font-weight: 600;
+  text-align: left;
+}
+
+.admin-empty {
+  margin: 0;
+  padding: 16px;
+  color: #6a5b4a;
+  text-align: left;
+}
+
+@keyframes adminViewIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 @media (max-width: 900px) {
   .admin-shell {
     grid-template-columns: 1fr;
+    width: 100%;
   }
 
   .admin-sidebar {
     position: static;
     height: auto;
+  }
+
+  .admin-main {
+    padding: 18px;
+  }
+
+  .admin-view-transition {
+    max-width: 100%;
   }
 }

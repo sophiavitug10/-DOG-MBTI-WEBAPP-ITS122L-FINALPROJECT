@@ -33,6 +33,11 @@ const NavBar = () => {
     navigate('/results');
   };
 
+  const handleAdminPanel = () => {
+    setIsMenuOpen(false);
+    navigate('/admin');
+  };
+
   useEffect(() => {
     let lastScrollY = window.scrollY;
 
@@ -102,6 +107,15 @@ const NavBar = () => {
               <button type="button" className="profile-action" onClick={handleResults}>
                 Results
               </button>
+              {user?.role === 'admin' && (
+                <>
+                  <div className="profile-divider" />
+                  <button type="button" className="profile-action" onClick={handleAdminPanel}>
+                    Admin Panel
+                  </button>
+                </>
+              )}
+              <div className="profile-divider" />
               <button type="button" className="profile-action danger" onClick={handleLogout}>
                 Logout
               </button>

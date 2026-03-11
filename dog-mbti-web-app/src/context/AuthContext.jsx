@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import {
 	completeSignupWithCode,
 	getCurrentUser,
+	getProfileRole,
 	loginWithPassword,
 	logout as logoutService,
 	onAuthStateChange,
@@ -18,14 +19,24 @@ export const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 
+	const withUserRole = async (baseUser) => {
+		if (!baseUser) {
+			return null;
+		}
+
+		const role = await getProfileRole(baseUser.id);
+		return { ...baseUser, role };
+	};
+
 	useEffect(() => {
 		let isMounted = true;
 
 		const initializeAuth = async () => {
 			try {
 				const currentUser = await getCurrentUser();
+				const roleAwareUser = await withUserRole(currentUser);
 				if (isMounted) {
-					setUser(currentUser);
+					setUser(roleAwareUser);
 				}
 			} finally {
 				if (isMounted) {
@@ -36,8 +47,9 @@ export const AuthProvider = ({ children }) => {
 
 		initializeAuth();
 
-		const subscription = onAuthStateChange((nextUser) => {
-			setUser(nextUser);
+		const subscription = onAuthStateChange(async (nextUser) => {
+			const roleAwareUser = await withUserRole(nextUser);
+			setUser(roleAwareUser);
 		});
 
 		return () => {
@@ -52,14 +64,16 @@ export const AuthProvider = ({ children }) => {
 
 	const completeSignup = async (payload) => {
 		const signedUpUser = await completeSignupWithCode(payload);
-		setUser(signedUpUser);
-		return signedUpUser;
+		const roleAwareUser = await withUserRole(signedUpUser);
+		setUser(roleAwareUser);
+		return roleAwareUser;
 	};
 
 	const login = async (payload) => {
 		const loggedInUser = await loginWithPassword(payload);
-		setUser(loggedInUser);
-		return loggedInUser;
+		const roleAwareUser = await withUserRole(loggedInUser);
+		setUser(roleAwareUser);
+		return roleAwareUser;
 	};
 
 	const requestPasswordResetCode = async (payload) => {
@@ -68,20 +82,23 @@ export const AuthProvider = ({ children }) => {
 
 	const verifyPasswordResetCode = async (payload) => {
 		const verifiedUser = await verifyResetCode(payload);
-		setUser(verifiedUser);
-		return verifiedUser;
+		const roleAwareUser = await withUserRole(verifiedUser);
+		setUser(roleAwareUser);
+		return roleAwareUser;
 	};
 
 	const changePassword = async (payload) => {
 		const updatedUser = await updatePassword(payload);
-		setUser(updatedUser);
-		return updatedUser;
+		const roleAwareUser = await withUserRole(updatedUser);
+		setUser(roleAwareUser);
+		return roleAwareUser;
 	};
 
 	const updateProfile = async (payload) => {
 		const updatedUser = await updateProfileService(payload);
-		setUser(updatedUser);
-		return updatedUser;
+		const roleAwareUser = await withUserRole(updatedUser);
+		setUser(roleAwareUser);
+		return roleAwareUser;
 	};
 
 	const logout = async () => {

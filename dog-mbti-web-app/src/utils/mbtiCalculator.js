@@ -10,7 +10,7 @@ export const processDogMBTIQuiz = (answers) => {
   const compatibleBreed = getBreedByMBTI(mbtiType);
   
   // Get detailed trait scores
-  const traitScores = getTraitScores(answers.map(a => a.value));
+  const traitScores = getTraitScores(answers);
   
   return {
     mbtiType,

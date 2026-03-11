@@ -201,8 +201,9 @@ export const getTraitScores = (answers) => {
   };
   
   answers.forEach(answer => {
-    if (scores.hasOwnProperty(answer.value)) {
-      scores[answer.value]++;
+    const value = typeof answer === 'string' ? answer : answer?.value;
+    if (Object.prototype.hasOwnProperty.call(scores, value)) {
+      scores[value]++;
     }
   });
   
