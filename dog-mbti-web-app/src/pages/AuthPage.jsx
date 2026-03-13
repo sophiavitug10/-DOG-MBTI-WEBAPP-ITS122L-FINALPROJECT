@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import './AuthPage.css'; 
 
+const OTP_LENGTH = 8;
+
 export default function AuthPage() {
   const [mode, setMode] = useState('login');
   const [step, setStep] = useState('entry');
@@ -69,12 +71,12 @@ export default function AuthPage() {
   const sendVerificationCode = async () => {
     if (isSignup) {
       await requestSignupCode({ email, name });
-      setNotice('We sent a 6-digit code to your email. Enter it below to finish sign up.');
+      setNotice(`We sent a ${OTP_LENGTH}-digit code to your email. Enter it below to finish sign up.`);
       return;
     }
 
     await requestPasswordResetCode({ email });
-    setNotice('We sent a 6-digit reset code to your email.');
+    setNotice(`We sent a ${OTP_LENGTH}-digit reset code to your email.`);
   };
 
   const handleEntrySubmit = async () => {
@@ -130,8 +132,8 @@ export default function AuthPage() {
   };
 
   const handleVerifySubmit = async () => {
-    if (code.trim().length !== 6) {
-      throw new Error('Please enter the 6-digit code.');
+    if (code.trim().length !== OTP_LENGTH) {
+      throw new Error(`Please enter the ${OTP_LENGTH}-digit code.`);
     }
 
     if (isSignup) {
@@ -277,9 +279,9 @@ export default function AuthPage() {
                   <input
                     type="text"
                     inputMode="numeric"
-                    pattern="[0-9]{6}"
-                    maxLength={6}
-                    placeholder="Enter 6-digit code"
+                    pattern={`[0-9]{${OTP_LENGTH}}`}
+                    maxLength={OTP_LENGTH}
+                    placeholder={`Enter ${OTP_LENGTH}-digit code`}
                     value={code}
                     onChange={(e) => setCode(e.target.value.replace(/\D/g, ''))}
                     required
